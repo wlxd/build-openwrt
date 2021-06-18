@@ -22,3 +22,4 @@ sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 # following two lines need to be added in iptables
 # iptables -t nat -A POSTROUTING -o eth0 -j FULLCONENAT
 # iptables -t nat -A PREROUTING -i eth0 -j FULLCONENAT
+# # 和sfe冲突的话 看这里 https://www.right.com.cn/forum/thread-319827-1-1.html
