@@ -7,3 +7,18 @@
 # 想要什么插件就单独的拉取什么插件就好，或者告诉我，我把插件放我的插件包就行了
 # 软件包地址：https://github.com/281677160/openwrt-package
 # 拉取插件请看《各种命令的简单介绍》第4条、第5条说明,不管大神还是新手请认真的看看,再次强调请不要一下子就拉取别人一堆插件的插件包,容易造成编译错误的
+
+# 以下为添加 full cone nat ，没有测试过！！！
+# Uncomment a feed source
+sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
+
+# Add a feed source
+#sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
+
+# fullcone NAT patch
+# # git clone -b master --single-branch https://github.com/LGA1150/openwrt-fullconenat package/fullconenat
+# https://github.com/LGA1150/openwrt-fullconenat/issues/4
+# # sed -i 's/SUBDIRS/M/' package/fullconenat/Makefile
+# following two lines need to be added in iptables
+# iptables -t nat -A POSTROUTING -o eth0 -j FULLCONENAT
+# iptables -t nat -A PREROUTING -i eth0 -j FULLCONENAT
