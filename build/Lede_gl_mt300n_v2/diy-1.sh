@@ -10,9 +10,9 @@
 #添加自定义插件链接（自己想要什么就github里面搜索然后添加）
 
 # 增加出国源
-# sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
+sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
 # Uncomment a feed source，如果用lede的源码只用加上这一句就可以看见ssr插件了！不用再次添加源的
-sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
+# sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 
 # git clone -b 18.06 https://github.com/garypang13/luci-theme-edge.git package/diy/luci-theme-edge  #主题-edge
 # git clone https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom.git package/diy/luci-theme-infinityfreedom  #透明主题
