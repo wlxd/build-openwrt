@@ -13,7 +13,8 @@
 sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
 # Uncomment a feed source，如果用lede的源码只用加上这一句就可以看见ssr插件了！不用再次添加源的
 # sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
-
+# Lede 的网易云解锁叫做 unblockmusic，天灵的叫做 unblockneteasemusic 地址在这里 https://github.com/immortalwrt/luci-app-unblockneteasemusic
+sed -i '$a src-git unblockneteasemusic https://github.com/immortalwrt/luci-app-unblockneteasemusic' feeds.conf.default
 # git clone -b 18.06 https://github.com/garypang13/luci-theme-edge.git package/diy/luci-theme-edge  #主题-edge
 # git clone https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom.git package/diy/luci-theme-infinityfreedom  #透明主题
 # git clone -b master https://github.com/vernesong/OpenClash.git package/diy/luci-app-openclash  #openclash出国软件
