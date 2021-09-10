@@ -106,6 +106,12 @@ jobs:
         cd openwrt
         git reset --hard fc7a887019b47cb12a9dfa565c2575045f791a4f
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+        if [ ${{matrix.target}} != openwrt ]; then
+          rm -rf package/lienol/luci-app-timecontrol
+          rm -rf package/ntlf9t/{smartdns,luci-app-smartdns}
+          rm -rf package/ctcgfw/{luci-app-argon-config,luci-theme-argonv3}
+          rm -rf package/lean/{luci-app-netdata,luci-theme-argon,k3screenctrl}
+        fi
         
     - name: 加载源,patch补丁和自定义设置
       run: |
