@@ -103,6 +103,8 @@ jobs:
       run: |
         df -hT $PWD
         git clone -b $REPO_BRANCH --single-branch $REPO_URL openwrt
+        cd openwrt
+        git reset --hard fc7a887019b47cb12a9dfa565c2575045f791a4f
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         
     - name: 加载源,patch补丁和自定义设置
