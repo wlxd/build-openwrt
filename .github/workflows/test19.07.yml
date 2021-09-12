@@ -125,7 +125,7 @@ jobs:
           /bin/bash "build/${{matrix.target}}/$DIY_P1_SH"
         fi
         if [ ${{matrix.target}} != "openwrt" ]; then
-          git clone https://github.com/Lienol/openwrt-package package/danshui
+          git clone -b main https://github.com/Lienol/openwrt-package package/danshui
         fi
         ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a
         if [ -f "build/${{matrix.target}}/$DIY_P2_SH" ]; then
