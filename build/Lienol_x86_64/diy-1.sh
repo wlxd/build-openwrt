@@ -33,4 +33,4 @@
 # git clone https://github.com/xiaorouji/openwrt-passwall package/luci-app-passwall
 
 # 自定义添加？
-# git clone -b 19.07 --single-branch https://github.com/281677160/openwrt-package package/diy/danshui
+ git clone -b 19.07 --single-branch https://github.com/281677160/openwrt-package package/diy/danshui
