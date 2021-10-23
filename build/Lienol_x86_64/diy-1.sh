@@ -30,3 +30,6 @@
 
 # 这里展示的是另外一种拉取方式，可能更加稳妥？想要passwall的在这里开启，已经试过可以正常拉取的
 # git clone https://github.com/xiaorouji/openwrt-passwall package/diy/luci-app-passwall
+
+# 自定义添加？
+git clone -b 19.07 --single-branch https://github.com/281677160/openwrt-package package/diy/danshui
