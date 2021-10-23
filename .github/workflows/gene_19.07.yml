@@ -145,7 +145,7 @@ jobs:
         fi
         if [ -n "$(ls -A "build/${{matrix.target}}/diy" 2>/dev/null)" ]; then
          cp -Rf build/${{matrix.target}}/diy/* ./
-         cp -Rf build/${{matrix.target}}/package/* ./ && rm -rf build/${{matrix.target}}/package
+         # cp -Rf build/${{matrix.target}}/package/* ./ && rm -rf build/${{matrix.target}}/package
         fi
         [ -e build/${{matrix.target}}/$CONFIG_FILE ]
         mv build/${{matrix.target}}/$CONFIG_FILE .config
