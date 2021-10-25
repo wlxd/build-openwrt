@@ -20,8 +20,12 @@ sed -i "s/OpenWrt /kkitown build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" pack
 # rm -rf package/lean/luci-app-sfe
 # rm -rf package/lean/luci-app-flowoffload
 
-rm -rf package/luci-app-ssr-mudb-server
+# cp -Rf "${Home}"/build/common/LIENOL/diy/* "${Home}"
+
+rm -rf package/feeds/lienol/luci-app-ssr-mudb-server
+rm -rf feeds/packages/libs/libcap
 rm -rf package/luci-app-passwall/{v2ray-core,v2ray-plugin,xray-core,xray-plugin}
+
 
 # 修改插件名字（修改名字后不知道会不会对插件功能有影响，自己多测试）
 sed -i 's/"BaiduPCS Web"/"百度网盘"/g' package/lean/luci-app-baidupcs-web/luasrc/controller/baidupcs-web.lua
