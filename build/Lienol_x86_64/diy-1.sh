@@ -35,7 +35,7 @@ svn co https://github.com/281677160/openwrt-package/branches/19.07/feeds/luci/ap
 # git clone https://github.com/xiaorouji/openwrt-passwall package/diy/luci-app-passwall
 
 # 自定义添加？
- git clone -b 19.07 --single-branch https://github.com/281677160/openwrt-package
+ # git clone -b 19.07 --single-branch https://github.com/281677160/openwrt-package
 
 
 
