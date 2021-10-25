@@ -35,6 +35,5 @@ svn co https://github.com/281677160/openwrt-package/branches/19.07/feeds/luci/ap
 # 自定义添加？
 #  git clone -b 19.07 --single-branch https://github.com/281677160/openwrt-package
 
-rm -rf package/luci-app-ssr-mudb-server
 
 
