@@ -11,7 +11,7 @@
  sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
 # 你可能需要删除lienol的插件
 # Uncomment a feed source，如果用lede的源码只用加上这一句就可以看见ssr插件了！不用再次添加源的
- sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
+# sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 # 发现天灵的是最新的
 # 这里注意你如果要在lieonl的固件中使用acc加速，你必须选择 DNSForwarder把它也加上，因为加速里面 目前仅支持 PDNSD 和 DNSForwarder，而此固件有没有内置；
 # 天灵acc 不能加，一加就编译失败 svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-19.07/package/ctcgfw/luci-app-turboacc package/diy/luci-app-turboacc
