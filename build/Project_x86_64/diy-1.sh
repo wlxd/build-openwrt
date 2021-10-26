@@ -15,6 +15,7 @@
  
 
  
+ # 添加ddnsto成功
  sed -i '$a src-git nas https://github.com/linkease/nas-packages.git;master' feeds.conf.default
  sed -i '$a src-git nas_luci https://github.com/linkease/nas-packages-luci.git;main' feeds.conf.default
  
