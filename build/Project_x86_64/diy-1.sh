@@ -12,3 +12,9 @@
 # svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-flowoffload package/diy/luci-app-flowoffload
 # 添加 京东签到,这个无法添加，暂时未解决
  # svn co https://github.com/jerrykuku/luci-app-jd-dailybonus/trunk package/diy/luci-app-jd-dailybonus  #京东签到
+ 
+
+ 
+ sed -i '$a src-git nas https://github.com/linkease/nas-packages.git;master' feeds.conf.default
+ sed -i '$a src-git nas_luci https://github.com/linkease/nas-packages-luci.git;main' feeds.conf.default
+ 
