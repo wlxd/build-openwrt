@@ -23,7 +23,7 @@ sed -i "s/OpenWrt /kkitown build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" pack
 # cp -Rf "${Home}"/build/common/LIENOL/diy/* "${Home}"
 
 rm -rf package/feeds/lienol/luci-app-ssr-mudb-server
-rm -rf feeds/packages/libs/libcap
+#　rm -rf feeds/packages/libs/libcap
 rm -rf package/luci-app-passwall/{v2ray-core,v2ray-plugin,xray-core,xray-plugin}
 
 
