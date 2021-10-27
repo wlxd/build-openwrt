@@ -19,7 +19,7 @@
 # svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-sfe package/diy/luci-app-sfe
 # svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-flowoffload package/diy/luci-app-flowoffload
 
-svn co https://github.com/281677160/openwrt-package/branches/19.07/feeds/luci/applications/luci-app-gowebdav package/luci-app-gowebdav
+#　svn co https://github.com/281677160/openwrt-package/branches/19.07/feeds/luci/applications/luci-app-gowebdav package/luci-app-gowebdav
 
 #真的是每一个都不一样，lienol维护的是19.07的主分支，如果需要添加passwall添加下面2行就可以，第二个是依赖，跟新的也算频繁，貌似很稳定，该有的插件都有了
 # sed -i '$a src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
@@ -49,12 +49,15 @@ svn co https://github.com/281677160/openwrt-package/branches/19.07/feeds/luci/ap
 #   svn checkout "https://github.com/immortalwrt/packages/trunk/net/$i" "package/helloworld/$i"; \
 # done
 
-sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
-svn co https://github.com/immortalwrt/packages/trunk/net/dns2socks package/helloworld/dns2socks
-svn co https://github.com/immortalwrt/packages/trunk/net/microsocks package/helloworld/microsocks
-svn co https://github.com/immortalwrt/packages/trunk/net/ipt2socks package/helloworld/ipt2socks
-svn co https://github.com/immortalwrt/packages/trunk/net/pdnsd-alt package/helloworld/pdnsd-alt
-svn co https://github.com/immortalwrt/packages/trunk/net/redsocks2 package/helloworld/redsocks2
+#　sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
+#　svn co https://github.com/immortalwrt/packages/trunk/net/dns2socks package/helloworld/dns2socks
+#　svn co https://github.com/immortalwrt/packages/trunk/net/microsocks package/helloworld/microsocks
+#　svn co https://github.com/immortalwrt/packages/trunk/net/ipt2socks package/helloworld/ipt2socks
+#　svn co https://github.com/immortalwrt/packages/trunk/net/pdnsd-alt package/helloworld/pdnsd-alt
+#　svn co https://github.com/immortalwrt/packages/trunk/net/redsocks2 package/helloworld/redsocks2
+
+# 注释掉lienol大diy1源
+　sed -i 's/^\(.*diy1\)/#&/' feeds.conf.default
 
 
 
