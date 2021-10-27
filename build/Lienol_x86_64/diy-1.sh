@@ -55,10 +55,3 @@
 #　svn co https://github.com/immortalwrt/packages/trunk/net/ipt2socks package/helloworld/ipt2socks
 #　svn co https://github.com/immortalwrt/packages/trunk/net/pdnsd-alt package/helloworld/pdnsd-alt
 #　svn co https://github.com/immortalwrt/packages/trunk/net/redsocks2 package/helloworld/redsocks2
-
-# 注释掉lienol大diy1源
-　sed -i 's/^\(.*diy1\)/#&/' feeds.conf.default
-
-
-
-
