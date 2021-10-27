@@ -22,9 +22,9 @@ sed -i "s/OpenWrt /kkitown build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" pack
 
 # cp -Rf "${Home}"/build/common/LIENOL/diy/* "${Home}"
 
-#　rm -rf package/feeds/lienol/luci-app-ssr-mudb-server
-#　rm -rf feeds/packages/libs/libcap
-＃rm -rf package/luci-app-passwall/{v2ray-core,v2ray-plugin,xray-core,xray-plugin}
+# rm -rf package/feeds/lienol/luci-app-ssr-mudb-server
+# rm -rf feeds/packages/libs/libcap
+# rm -rf package/luci-app-passwall/{v2ray-core,v2ray-plugin,xray-core,xray-plugin}
 
 
 # 修改插件名字（修改名字后不知道会不会对插件功能有影响，自己多测试）
