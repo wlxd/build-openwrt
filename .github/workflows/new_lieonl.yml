@@ -168,8 +168,8 @@ jobs:
         prefix: ${{ github.workspace }}/openwrt
         
     - name: SSH远程
-      uses: P3TERX/ssh2actions@v1.0.0
-      if:  env.SSH_ACTIONS == 'true' || (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
+      uses: danshui-git/debugger-action@master
+      if: env.SSH_ACTIONS == 'true' || (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
       env:
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
