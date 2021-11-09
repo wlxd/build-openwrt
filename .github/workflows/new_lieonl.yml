@@ -119,7 +119,6 @@ jobs:
       run: |
         ./scripts/feeds update -a
         ./scripts/feeds install -a
-        ./scripts/feeds install -a
         
     - name: Load custom feeds
       run: |
@@ -173,7 +172,7 @@ jobs:
         # $GITHUB_WORKSPACE/$DIY_P2_SH
         
     - name: 再次更新源
-      run: cd openwrt && ./scripts/feeds update && ./scripts/feeds update && ./scripts/feeds install -a 
+      run: cd openwrt && ./scripts/feeds update && ./scripts/feeds install -a 
         
     - name: SSH远程
       uses: danshui-git/debugger-action@master
