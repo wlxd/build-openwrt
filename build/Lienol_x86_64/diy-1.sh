@@ -55,3 +55,6 @@ sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
 #　svn co https://github.com/immortalwrt/packages/trunk/net/ipt2socks package/helloworld/ipt2socks
 #　svn co https://github.com/immortalwrt/packages/trunk/net/pdnsd-alt package/helloworld/pdnsd-alt
 #　svn co https://github.com/immortalwrt/packages/trunk/net/redsocks2 package/helloworld/redsocks2
+
+rm -rf feeds/packages/libs/libcap
+svn co https://github.com/openwrt/packages/trunk/libs/libcap feeds/packages/libs/libcap
