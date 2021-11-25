@@ -23,9 +23,9 @@ sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g' package/lean/default-settings/files/zzz
 # 修改版本号
 # sed -i 's/V2021/V$(date "+%Y.%m.%d")/g' package/lean/default-settings/files/zzz-default-settings
 
- rm -rf  ./package/danshui/net/naiveproxy/Makefile
+ rm -rf  /package/danshui/net/naiveproxy/Makefile
  wget -N --no-check-certificate https://github.com/immortalwrt/packages/raw/master/net/naiveproxy/Makefile -O /package/danshui/net/naiveproxy/Makefile
- chmod +x ./package/danshui/net/naiveproxy/Makefile
+ chmod +x /package/danshui/net/naiveproxy/Makefile
 
 # 修改插件名字（修改名字后不知道会不会对插件功能有影响，自己多测试）
 sed -i 's/"BaiduPCS Web"/"百度网盘"/g' package/ctcgfw/luci-app-baidupcs-web/luasrc/controller/baidupcs-web.lua
