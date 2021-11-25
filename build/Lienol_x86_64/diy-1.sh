@@ -57,5 +57,5 @@ sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
 #　svn co https://github.com/immortalwrt/packages/trunk/net/redsocks2 package/helloworld/redsocks2
 
 
-# rm -rf feeds/packages/libs/libcap
-# svn co https://github.com/openwrt/packages/branches/openwrt-21.02/libs/libcap/ feeds/packages/libs/libcap
+rm -rf feeds/packages/libs/libcap
+svn co https://github.com/openwrt/packages/branches/openwrt-21.02/libs/libcap/ feeds/packages/libs/libcap
