@@ -19,3 +19,7 @@
  sed -i '$a src-git nas https://github.com/linkease/nas-packages.git;master' feeds.conf.default
  sed -i '$a src-git nas_luci https://github.com/linkease/nas-packages-luci.git;main' feeds.conf.default
  
+rm -rf  /package/danshui/net/naiveproxy/Makefile
+wget -N --no-check-certificate https://github.com/immortalwrt/packages/raw/master/net/naiveproxy/Makefile
+cp -rf Makefile /package/danshui/net/naiveproxy/Makefile
+chmod +x /package/danshui/net/naiveproxy/Makefile
