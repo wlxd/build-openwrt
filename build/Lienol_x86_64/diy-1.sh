@@ -22,8 +22,10 @@
 #　svn co https://github.com/281677160/openwrt-package/branches/19.07/feeds/luci/applications/luci-app-gowebdav package/luci-app-gowebdav
 
 #真的是每一个都不一样，lienol维护的是19.07的主分支，如果需要添加passwall添加下面2行就可以，第二个是依赖，跟新的也算频繁，貌似很稳定，该有的插件都有了
+
 sed -i '$a src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
 sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
+
  # git clone https://github.com/kenzok8/litte package/litte
  #  git clone https://github.com/xiaorouji/openwrt-passwall package/passwall
   
@@ -39,8 +41,6 @@ sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
 # 自定义添加？
  # git clone -b 19.07 --single-branch https://github.com/281677160/openwrt-package
  
- 
-
 # git clone https://github.com/xiaorouji/openwrt-passwall package/luci-app-passwall
 # git clone https://github.com/fw876/helloworld package/luci-app-ssr-plus
 
@@ -55,7 +55,6 @@ sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
 #　svn co https://github.com/immortalwrt/packages/trunk/net/ipt2socks package/helloworld/ipt2socks
 #　svn co https://github.com/immortalwrt/packages/trunk/net/pdnsd-alt package/helloworld/pdnsd-alt
 #　svn co https://github.com/immortalwrt/packages/trunk/net/redsocks2 package/helloworld/redsocks2
-
 
 rm -rf feeds/packages/libs/libcap
 svn co https://github.com/openwrt/packages/branches/openwrt-21.02/libs/libcap/ feeds/packages/libs/libcap
