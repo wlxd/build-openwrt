@@ -23,6 +23,8 @@ sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g' package/lean/default-settings/files/zzz
 # 修改版本号
 # sed -i 's/V2021/V$(date "+%Y.%m.%d")/g' package/lean/default-settings/files/zzz-default-settings
 
+rm -rf package/lean/luci-app-ssr-plus
+
 # rm -rf  /package/danshui/net/naiveproxy/Makefile
 # wget -N --no-check-certificate https://github.com/immortalwrt/packages/raw/master/net/naiveproxy/Makefile -O /package/danshui/net/naiveproxy/Makefile
 # chmod +x /package/danshui/net/naiveproxy/Makefile
