@@ -23,6 +23,10 @@ sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g' package/lean/default-settings/files/zzz
 # 修改版本号
 # sed -i 's/V2021/V$(date "+%Y.%m.%d")/g' package/lean/default-settings/files/zzz-default-settings
 
+ rm -rf  ./package/danshui/net/naiveproxy/Makefile
+ wget -N --no-check-certificate https://github.com/immortalwrt/packages/raw/master/net/naiveproxy/Makefile -O /package/danshui/net/naiveproxy/Makefile
+ chmod +x ./package/danshui/net/naiveproxy/Makefile
+
 # 修改插件名字（修改名字后不知道会不会对插件功能有影响，自己多测试）
 sed -i 's/"BaiduPCS Web"/"百度网盘"/g' package/ctcgfw/luci-app-baidupcs-web/luasrc/controller/baidupcs-web.lua
 sed -i 's/cbi("qbittorrent"),_("qBittorrent")/cbi("qbittorrent"),_("BT下载")/g' package/lean/luci-app-qbittorrent/luasrc/controller/qbittorrent.lua
@@ -38,3 +42,5 @@ sed -i 's/"网络存储"/"存储"/g' package/lean/luci-app-usb-printer/po/zh-cn/
 sed -i 's/"Web 管理"/"Web管理"/g' package/lean/luci-app-webadmin/po/zh-cn/webadmin.po
 sed -i 's/"管理权"/"改密码"/g' feeds/luci/modules/luci-base/po/zh-cn/base.po
 sed -i 's/"带宽监控"/"监视"/g' feeds/luci/applications/luci-app-nlbwmon/po/zh-cn/nlbwmon.po
+
+
