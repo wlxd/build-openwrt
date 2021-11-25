@@ -20,3 +20,5 @@
  sed -i '$a src-git nas_luci https://github.com/linkease/nas-packages-luci.git;main' feeds.conf.default
  
  # sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
+
+sed -i "/helloworld/d" feeds.conf.default
