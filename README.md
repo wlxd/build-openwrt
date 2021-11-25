@@ -6,6 +6,11 @@ Lede 和 Lieonl开始出现一些分支，主要是因为 Leionl 是以官方Ope
 
 Lieonl中在11252021中新增了SFE加速，之前是没有的。  
 
+> 可能有用：
+>  1 在make menuconfig进行配置编译选项中，Libraries  --->下面，libustream-openssl和libustream-mbedtls中间去掉一个。
+>  2 在make menuconfig进行配置编译选项中，LuCI->Collection下的libustream-mbedtls和luci-ssl-openssl两个选项都进行了选择，其实只要进行其中一个选择便可。
+> http://topurl.cn/9KZ
+
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
