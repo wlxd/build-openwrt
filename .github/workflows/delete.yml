@@ -20,7 +20,7 @@ on:
       delete-older-releases:
         description: '删除旧的发布'
         required: false
-        default: 'true'           #删除旧的发布（true=开启）（false=关闭）
+        default: 'false'           #删除旧的发布（true=开启）（false=关闭）
 
 #  schedule:
 #    - cron: 0 8 */5 * *
