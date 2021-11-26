@@ -125,9 +125,9 @@ jobs:
           chmod +x build/${{matrix.target}}/$DIY_P1_SH
           /bin/bash "build/${{matrix.target}}/$DIY_P1_SH"
         fi
-        # if [ ${{matrix.target}} != "openwrt" ]; then
-        #  git clone -b openwrt-18.06 --single-branch  https://github.com/immortalwrt/packages/ package/danshui
-        # fi
+        if [ ${{matrix.target}} != "openwrt" ]; then
+          git clone -b openwrt-18.06 --single-branch  https://github.com/immortalwrt/packages/ package/danshui
+        fi
         ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a
         if [ -f "build/${{matrix.target}}/$DIY_P2_SH" ]; then
           chmod +x build/${{matrix.target}}/$DIY_P2_SH
