@@ -78,7 +78,8 @@ jobs:
         echo "UPLOAD_RELEASE=${UPLOAD_RELEASE}" >> $GITHUB_ENV
         echo "SERVERCHAN_SCKEY=${SERVERCHAN_SCKEY}" >> $GITHUB_ENV
         echo "USE_CACHEWRTBUILD=${USE_CACHEWRTBUILD}" >> $GITHUB_ENV
-    
+	echo "ZZZ=package/emortal/default-settings/files/zzz-default-settings" >> $GITHUB_ENV
+
     - name: 微信通知
       uses: emon100/Action-Serverchan@v2
       if: env.SERVERCHAN_SCKEY == 'true' || (github.event.inputs.wxtz == 'wxtz' && github.event.inputs.wxtz  != 'false')
@@ -125,11 +126,8 @@ jobs:
           chmod +x build/${{matrix.target}}/$DIY_P1_SH
           /bin/bash "build/${{matrix.target}}/$DIY_P1_SH"
         fi
-        if [ ${{matrix.target}} == "Project_x86_64" ]; then
-	echo "ZZZ=package/lean/default-settings/files/zzz-default-settings" >> $GITHUB_ENV
-	chmod 775 build/${{matrix.target}}/1806zzz-default-settings
-	cp -Rf build/${{matrix.target}}/1806zzz-default-settings $ZZZ
-        #  git clone -b openwrt-18.06 --single-branch  https://github.com/immortalwrt/packages/ package/danshui
+        if [ ${{matrix.target}} == "Project_x86_64 " ]; then
+             [[ -e build/${{matrix.target}}/1806zzz-default-settings ]] && mv "-e build/${{matrix.target}}/1806zzz-default-settings" $ZZZ
         fi
         ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a
         if [ -f "build/${{matrix.target}}/$DIY_P2_SH" ]; then
