@@ -13,7 +13,7 @@
 # 添加 京东签到,这个无法添加，暂时未解决
  # svn co https://github.com/jerrykuku/luci-app-jd-dailybonus/trunk package/diy/luci-app-jd-dailybonus  #京东签到
  
- git clone https://github.com/kenzok78/jeii package/jeii
+ # git clone https://github.com/kenzok78/jeii package/jeii
  
  # 添加ddnsto成功
  sed -i '$a src-git nas https://github.com/linkease/nas-packages.git;master' feeds.conf.default
