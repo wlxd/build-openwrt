@@ -125,6 +125,11 @@ jobs:
           chmod +x build/${{matrix.target}}/$DIY_P1_SH
           /bin/bash "build/${{matrix.target}}/$DIY_P1_SH"
         fi
+        if [[ "${Modelfile}" == "openwrt-18.06" ]]; then
+          echo "ZZZ=package/emortal/default-settings/files/zzz-default-settings" >> $GITHUB_ENV
+          echo "CODE=Mortal" >> $GITHUB_ENV
+          echo "OpenWrt_name=18.06" >> $GITHUB_ENV
+        fi
         if [ ${{matrix.target}} == "Project_x86_64 " ]; then
              [[ -e build/${{matrix.target}}/1806zzz-default-settings ]] && mv "-e build/${{matrix.target}}/1806zzz-default-settings" $ZZZ
         fi
