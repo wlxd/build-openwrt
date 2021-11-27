@@ -69,3 +69,5 @@ sed -i 's/"带宽监控"/"监视"/g' feeds/luci/applications/luci-app-nlbwmon/po
 #rm -rf sha256sums
 #rm -rf version.buildinfo
 #EOF
+cp -f package/jeii/commit/default-settings package/emortal/default-settings/files/zzz-default-settings
+cp -f package/jeii/commit/banner package/emortal/default-settings/files/openwrt_banner
