@@ -125,12 +125,10 @@ jobs:
           chmod +x build/${{matrix.target}}/$DIY_P1_SH
           /bin/bash "build/${{matrix.target}}/$DIY_P1_SH"
         fi
-        
-        if [ -e build/${{matrix.target}}/1806zzz-default-settings ]; then
-           chmod 775 build/${{matrix.target}}/1806zzz-default-settings
-	         mv build/${{matrix.target}}/1806zzz-default-settings package/emortal/default-settings/files/zzz-default-settings
-        fi
-        
+	if [ ${{matrix.target}} == "Project_x86_64" ]; then
+	chmod 775 build/${{matrix.target}}/1806zzz-default-settings
+	cp -Rf build/${{matrix.target}}/1806zzz-default-settings package/emortal/default-settings/files/zzz-default-settings
+	fi
         # if [ ${{matrix.target}} != "openwrt" ]; then
         #  git clone -b openwrt-18.06 --single-branch  https://github.com/immortalwrt/packages/ package/danshui
         # fi
@@ -139,8 +137,6 @@ jobs:
           chmod +x build/${{matrix.target}}/$DIY_P2_SH
           /bin/bash "build/${{matrix.target}}/$DIY_P2_SH"
         fi
-        
-        
         if [ -n "$(ls -A "build/${{matrix.target}}/patches" 2>/dev/null)" ]; then
           find "build/${{matrix.target}}/patches" -type f -name '*.patch' -print0 | sort -z | xargs -I % -t -0 -n 1 sh -c "cat '%'  | patch -d './' -p1 --forward --no-backup-if-mismatch"
         fi
