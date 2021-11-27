@@ -78,7 +78,6 @@ jobs:
         echo "UPLOAD_RELEASE=${UPLOAD_RELEASE}" >> $GITHUB_ENV
         echo "SERVERCHAN_SCKEY=${SERVERCHAN_SCKEY}" >> $GITHUB_ENV
         echo "USE_CACHEWRTBUILD=${USE_CACHEWRTBUILD}" >> $GITHUB_ENV
-	echo "ZZZ=package/emortal/default-settings/files/zzz-default-settings" >> $GITHUB_ENV
 
     - name: 微信通知
       uses: emon100/Action-Serverchan@v2
