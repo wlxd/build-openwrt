@@ -111,16 +111,14 @@ jobs:
       working-directory: /workdir
       run: |
         df -hT $PWD
-        git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
+        git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt > /dev/null 2>&1
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+        cd $GITHUB_WORKSPACE/openwrt
+        ./scripts/feeds update -a > /dev/null 2>&1
+        echo "Home=${GITHUB_WORKSPACE}/openwrt" >> $GITHUB_ENV
+        echo "PATH1=${GITHUB_WORKSPACE}/openwrt/build/${{matrix.target}}" >> $GITHUB_ENV
         
-    - name: 更新 & 安装 feeds
-      working-directory: ./openwrt
-      run: |
-        ./scripts/feeds update -a
-        ./scripts/feeds install -a
-        
-    - name: Load custom feeds
+    - name: 加载自定义源
       run: |
            cp -Rf `find ./ -maxdepth 1 -type d ! -path './openwrt' ! -path './'` openwrt
            cd openwrt
@@ -128,7 +126,15 @@ jobs:
            chmod +x build/${{matrix.target}}/$DIY_P1_SH
            /bin/bash "build/${{matrix.target}}/$DIY_P1_SH"
            fi
-           
+           if [ -f "build/${{matrix.target}}/$DIY_P2_SH" ]; then
+           chmod +x build/${{matrix.target}}/$DIY_P2_SH
+           /bin/bash "build/${{matrix.target}}/$DIY_P2_SH"
+           fi
+           ./scripts/feeds update -a > /dev/null 2>&1
+           ./scripts/feeds install -a > /dev/null 2>&1
+           ./scripts/feeds install -a
+            [[ -e "$PATH1/$CONFIG_FILE" ]] && mv "$PATH1/$CONFIG_FILE" .config
+            
            # if [ -f "$FEEDS_CONF" ]; then
            #   mv $FEEDS_CONF openwrt/feeds.conf.default
            # fi
@@ -138,41 +144,6 @@ jobs:
            # cd openwrt
            # $GITHUB_WORKSPACE/$DIY_P1_SH
            
-    - name: 自定义源
-      run: |
-        if [ -e files ]; then
-           mv files openwrt/files  
-        fi  
-        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-        cd openwrt
-        if [ -f "build/${{matrix.target}}/$DIY_P2_SH" ]; then
-          chmod +x build/${{matrix.target}}/$DIY_P2_SH
-          /bin/bash "build/${{matrix.target}}/$DIY_P2_SH"
-        fi
-        if [ -n "$(ls -A "build/${{matrix.target}}/patches" 2>/dev/null)" ]; then
-          find "build/${{matrix.target}}/patches" -type f -name '*.patch' -print0 | sort -z | xargs -I % -t -0 -n 1 sh -c "cat '%'  | patch -d './' -p1 --forward --no-backup-if-mismatch"
-        fi
-        if [ -n "$(ls -A "build/${{matrix.target}}/files" 2>/dev/null)" ]; then
-         cp -rf build/${{matrix.target}}/files files
-         chmod -R 777 build/${{matrix.target}}/files/* ./
-        fi
-        if [ -n "$(ls -A "build/${{matrix.target}}/diy" 2>/dev/null)" ]; then
-         cp -Rf build/${{matrix.target}}/diy/* ./
-        fi
-        rm -rf package/litte/adguardhome
-        rm -rf package/litte/luci-app-adguardhome
-        cp -f package/litte/commit/zzz-default-settings package/default-settings/files/zzz-default-settings
-        cp -f package/litte/commit/banner package/base-files/files/etc/banner
-        # cp -f package/litte/commit/Lienoldiffconfig .config && make defconfig
-        ./scripts/feeds update && ./scripts/feeds install -a 
-        [ -e build/${{matrix.target}}/$CONFIG_FILE ]
-        mv build/${{matrix.target}}/$CONFIG_FILE .config
-        echo "::set-output name=status::success"
-        
-        # chmod +x $DIY_P2_SH
-        #　cd openwrt
-        # $GITHUB_WORKSPACE/$DIY_P2_SH
-        
         
     - name: SSH远程连接（制作.config配置文件）
       if: env.SSH_ACTIONS == 'true' || (github.event.inputs.ssh == 'ssh')
