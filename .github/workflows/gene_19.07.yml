@@ -107,12 +107,12 @@ jobs:
         git clone -b $REPO_BRANCH --single-branch $REPO_URL openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         cd openwrt
-        if [ ${{matrix.target}} != openwrt ]; then
-         rm -rf package/lienol/luci-app-timecontrol
-         rm -rf package/ntlf9t/{smartdns,luci-app-smartdns}
-         rm -rf package/emortal/{luci-app-argon-config,luci-theme-argonv3}
-         rm -rf package/lean/{luci-app-netdata,luci-theme-argon,k3screenctrl}
-        fi
+        # if [ ${{matrix.target}} != openwrt ]; then
+         # rm -rf package/lienol/luci-app-timecontrol
+         # rm -rf package/ntlf9t/{smartdns,luci-app-smartdns}
+         # rm -rf package/emortal/{luci-app-argon-config,luci-theme-argonv3}
+         # rm -rf package/lean/{luci-app-netdata,luci-theme-argon,k3screenctrl}
+        # fi
         ./scripts/feeds update -a
         ./scripts/feeds install -a
         ./scripts/feeds install -a
@@ -120,23 +120,20 @@ jobs:
          
     - name: 加载源,patch补丁和自定义设置
       run: |
-        if [ ${{matrix.target}} == "Lede_phicomm_n1" -o ${{matrix.target}} == "Project_phicomm_n1" ];then
-          svn co https://github.com/281677160/N1/trunk reform
-        fi
         cp -Rf `find ./ -maxdepth 1 -type d ! -path './openwrt' ! -path './'` openwrt
         cd openwrt
         if [ -f "build/${{matrix.target}}/$DIY_P1_SH" ]; then
           chmod +x build/${{matrix.target}}/$DIY_P1_SH
           /bin/bash "build/${{matrix.target}}/$DIY_P1_SH"
         fi
-        if [ ${{matrix.target}} != "openwrt" ]; then
+        # if [ ${{matrix.target}} != "openwrt" ]; then
          #  git clone -b openwrt-18.06 --single-branch  https://github.com/immortalwrt/packages/ package/danshui
-          git clone -b 19.07 --single-branch https://github.com/281677160/openwrt-package package/danshui
+          # git clone -b 19.07 --single-branch https://github.com/281677160/openwrt-package package/danshui
            # cp -Rf package/* './openwrt' && rm -rf './openwrt/package'
-        fi
-        if [ -f "build/${{matrix.target}}/$DIY_P2_SH" ]; then
-          chmod +x build/${{matrix.target}}/$DIY_P2_SH
-          /bin/bash "build/${{matrix.target}}/$DIY_P2_SH"
+        # fi
+        if [ -f "build/${{matrix.target}}/$DIY_P3_SH" ]; then
+          chmod +x build/${{matrix.target}}/$DIY_P3_SH
+          /bin/bash "build/${{matrix.target}}/$DIY_P3_SH"
         fi
         if [ -n "$(ls -A "build/${{matrix.target}}/patches" 2>/dev/null)" ]; then
           find "build/${{matrix.target}}/patches" -type f -name '*.patch' -print0 | sort -z | xargs -I % -t -0 -n 1 sh -c "cat '%'  | patch -d './' -p1 --forward --no-backup-if-mismatch"
@@ -163,13 +160,13 @@ jobs:
          echo "NAME2=Project-" >> $GITHUB_ENV
          echo "ZUOZHE=CTCGFW" >> $GITHUB_ENV
         fi
-        rm -rf {LICENSE,README,README.md}
-        rm -rf ./*/{LICENSE,README,README.md}
-        rm -rf ./*/*/{LICENSE,README,README.md}
-        git clone https://github.com/openwrt-dev/po2lmo.git
-        pushd po2lmo
-        make && sudo make install
-        popd
+        # rm -rf {LICENSE,README,README.md}
+        # rm -rf ./*/{LICENSE,README,README.md}
+        # rm -rf ./*/*/{LICENSE,README,README.md}
+        # git clone https://github.com/openwrt-dev/po2lmo.git
+        # pushd po2lmo
+        # make && sudo make install
+        # popd
         
         
     - name: 缓存加速(7天内对应源码相同机型二次编译有效，每次只保留一个源码的缓存)
@@ -189,7 +186,7 @@ jobs:
     - name: 生成配置文件
       run: |
         cd openwrt
-        source "${PATH1}/common.sh" && Diy_chajian > /dev/null 2>&1
+        # source "${PATH1}/common.sh" && Diy_chajian > /dev/null 2>&1
         make defconfig > /dev/null 2>&1
         ./scripts/diffconfig.sh > ${GITHUB_WORKSPACE}/config.txt
         echo "TARGET_BOARD=$(awk -F '[="]+' '/TARGET_BOARD/{print $2}' .config)" >> $GITHUB_ENV
@@ -205,22 +202,9 @@ jobs:
           echo "TARGET_PROFILE=armvirt" >> $GITHUB_ENV
         fi
         
-    - name: 编译信息
-      run: |
-        cd openwrt
-        #./scripts/diffconfig.sh > ${GITHUB_WORKSPACE}/config.txt
-        source "${PATH1}/common.sh" && Diy_chuli > /dev/null 2>&1
-        if [ "${REGULAR_UPDATE}" == "true" ]; then
-          source "${PATH1}/upgrade.sh" && Diy_Part2 > /dev/null 2>&1
-        fi
-        if [ "${BY_INFORMATION}" == "true" ]; then
-          source "${PATH1}/upgrade.sh" && GET_TARGET_INFO
-          source "${PATH1}/common.sh" && Diy_xinxi
-        fi    
-        
     - name: 上传.config配置文件在github空间
       uses: actions/upload-artifact@v2
       if: env.UPLOAD_CONFIG == 'true'
       with:
-        name: .config_${{ env.CODE }}_${{ env.TARGET_PROFILE }}_${{ env.Compile_Date }}
+        name: .config_${{matrix.target}}_${{ env.TARGET_PROFILE }}_${{ env.Compile_Date }}
         path: config.txt
