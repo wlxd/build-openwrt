@@ -106,10 +106,11 @@ jobs:
         git clone -b $REPO_BRANCH --single-branch $REPO_URL openwrt
         cd openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+         ./scripts/feeds update -a > /dev/null 2>&1
         if [ ${{matrix.target}} != openwrt ]; then
           rm -rf package/lienol/luci-app-timecontrol
           rm -rf package/ntlf9t/{smartdns,luci-app-smartdns}
-          rm -rf package/ctcgfw/{luci-app-argon-config,luci-theme-argonv3}
+          rm -rf package/emortal/{luci-app-argon-config,luci-theme-argonv3}
           rm -rf package/lean/{luci-app-netdata,luci-theme-argon,k3screenctrl}
         fi
         
@@ -128,7 +129,7 @@ jobs:
         #  git clone -b $REPO_BRANCH --single-branch https://github.com/281677160/openwrt-package package/danshui
         # git clone -b 19.07 --single-branch https://github.com/281677160/openwrt-package package/danshui
         # fi
-        ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a
+        ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a
         if [ -f "build/${{matrix.target}}/$DIY_P2_SH" ]; then
           chmod +x build/${{matrix.target}}/$DIY_P2_SH
           /bin/bash "build/${{matrix.target}}/$DIY_P2_SH"
