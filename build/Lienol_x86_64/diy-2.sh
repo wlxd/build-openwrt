@@ -26,6 +26,11 @@ sed -i "s/OpenWrt /kkitown build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" pack
 # rm -rf feeds/packages/libs/libcap
 # rm -rf package/luci-app-passwall/{v2ray-core,v2ray-plugin,xray-core,xray-plugin}
 
+rm -rf package/litte/adguardhome
+rm -rf package/litte/luci-app-adguardhome
+cp -f package/litte/commit/zzz-default-settings package/default-settings/files/zzz-default-settings
+cp -f package/litte/commit/banner package/base-files/files/etc/banner
+
 
 # 修改插件名字（修改名字后不知道会不会对插件功能有影响，自己多测试）
 sed -i 's/"aMule设置"/"电驴下载"/g' `grep "aMule设置" -rl ./`
