@@ -134,7 +134,6 @@ jobs:
           # git clone -b 19.07 --single-branch https://github.com/281677160/openwrt-package package/danshui
            # cp -Rf package/* './openwrt' && rm -rf './openwrt/package'
         # fi
-         ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a
         if [ -f "build/${{matrix.target}}/$DIY_P2_SH" ]; then
           chmod +x build/${{matrix.target}}/$DIY_P2_SH
           /bin/bash "build/${{matrix.target}}/$DIY_P2_SH"
@@ -150,6 +149,8 @@ jobs:
          cp -Rf build/${{matrix.target}}/diy/* ./
          # cp -Rf build/${{matrix.target}}/package/* ./ && rm -rf build/${{matrix.target}}/package
         fi
+         ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a
+         
         [ -e build/${{matrix.target}}/$CONFIG_FILE ]
         mv build/${{matrix.target}}/$CONFIG_FILE .config
         if [ $REPO_URL == "https://github.com/coolsnowwolf/lede" ]; then
@@ -169,6 +170,7 @@ jobs:
         pushd po2lmo
         make && sudo make install
         popd
+        
         
     - name: 缓存加速(7天内对应源码相同机型二次编译有效，每次只保留一个源码的缓存)
       if: env.USE_CACHEWRTBUILD == 'true'
