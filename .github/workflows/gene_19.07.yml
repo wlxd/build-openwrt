@@ -137,8 +137,17 @@ jobs:
         fi
         [ -e build/${{matrix.target}}/$CONFIG_FILE ]
         mv build/${{matrix.target}}/$CONFIG_FILE .config
-        cp -f package/jeii/commit/default-settings package/emortal/default-settings/files/zzz-default-settings
-        cp -f package/jeii/commit/banner package/emortal/default-settings/files/openwrt_banner
+        
+        if [ ${{matrix.target}} == Lienol_x86_64 ]; then
+            rm -rf package/litte/adguardhome && rm -rf package/litte/luci-app-adguardhome
+            cp -f package/litte/zzz-default-settings package/default-settings/files/zzz-default-settings
+            cp -f package/litte/banner package/base-files/files/etc/banner
+        fi
+        if [ ${{matrix.target}} == Project_x86_64 ]; then
+            rm -rf package/litte/adguardhome && rm -rf package/litte/luci-app-adguardhome
+            cp -f package/litte/zzz-default-settings package/default-settings/files/zzz-default-settings
+            cp -f package/litte/banner package/base-files/files/etc/banner
+        fi
         ./scripts/feeds update -a
         ./scripts/feeds install -a
         # if [ -n "$(ls -A "build/${{matrix.target}}/patches" 2>/dev/null)" ]; then
