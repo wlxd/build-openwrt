@@ -59,11 +59,12 @@
 # rm -rf feeds/packages/libs/libcap
 # svn co https://github.com/openwrt/packages/branches/openwrt-21.02/libs/libcap/ feeds/packages/libs/libcap
 
+git clone https://github.com/kenzok78/jeii package/jeii
+git clone https://github.com/kenzok8/litte package/litte
+git clone https://github.com/xiaorouji/openwrt-passwall package/passwall
+
  # 添加ddnsto
 sed -i '$a src-git nas https://github.com/linkease/nas-packages.git;master' feeds.conf.default
 sed -i '$a src-git nas_luci https://github.com/linkease/nas-packages-luci.git;main' feeds.conf.default
 
-git clone https://github.com/kenzok78/jeii package/jeii
-git clone https://github.com/kenzok8/litte package/litte
-git clone https://github.com/xiaorouji/openwrt-passwall package/passwall
 
