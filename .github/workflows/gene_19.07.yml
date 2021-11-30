@@ -140,8 +140,8 @@ jobs:
         
         if [ ${{matrix.target}} == Lienol_x86_64 ]; then
             rm -rf package/litte/adguardhome && rm -rf package/litte/luci-app-adguardhome
-            cp -f package/litte/zzz-default-settings package/default-settings/files/zzz-default-settings
-            cp -f package/litte/banner package/base-files/files/etc/banner
+            cp -f package/litte/commit/zzz-default-settings package/default-settings/files/zzz-default-settings
+            cp -f package/litte/commit/banner package/base-files/files/etc/banner
         fi
         if [ ${{matrix.target}} == Project_x86_64 ]; then
             rm -rf package/litte/adguardhome && rm -rf package/litte/luci-app-adguardhome
