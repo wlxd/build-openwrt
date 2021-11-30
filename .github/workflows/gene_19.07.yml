@@ -122,6 +122,10 @@ jobs:
       run: |
         cp -Rf `find ./ -maxdepth 1 -type d ! -path './openwrt' ! -path './'` openwrt
         cd openwrt
+        if [ -f "build/${{matrix.target}}/$DIY_P3_SH" ]; then
+          chmod +x build/${{matrix.target}}/$DIY_P3_SH
+          /bin/bash "build/${{matrix.target}}/$DIY_P3_SH"
+        fi
         if [ -f "build/${{matrix.target}}/$DIY_P1_SH" ]; then
           chmod +x build/${{matrix.target}}/$DIY_P1_SH
           /bin/bash "build/${{matrix.target}}/$DIY_P1_SH"
@@ -143,12 +147,7 @@ jobs:
             cp -f package/litte/zzz-default-settings package/default-settings/files/zzz-default-settings
             cp -f package/litte/banner package/base-files/files/etc/banner
         fi
-        ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a
-        if [ -f "build/${{matrix.target}}/$DIY_P3_SH" ]; then
-          chmod +x build/${{matrix.target}}/$DIY_P3_SH
-          /bin/bash "build/${{matrix.target}}/$DIY_P3_SH"
-        fi
-        
+        ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a        
         # if [ -n "$(ls -A "build/${{matrix.target}}/patches" 2>/dev/null)" ]; then
           # find "build/${{matrix.target}}/patches" -type f -name '*.patch' -print0 | sort -z | xargs -I % -t -0 -n 1 sh -c "cat '%'  | patch -d './' -p1 --forward --no-backup-if-mismatch"
         # fi
