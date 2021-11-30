@@ -64,7 +64,7 @@ git clone https://github.com/kenzok8/litte package/litte
 git clone https://github.com/xiaorouji/openwrt-passwall package/passwall
 
  # 添加ddnsto, lieonl下无法添加成功
-# sed -i '$a src-git nas https://github.com/linkease/nas-packages.git;master' feeds.conf.default
-# sed -i '$a src-git nas_luci https://github.com/linkease/nas-packages-luci.git;main' feeds.conf.default
+sed -i '$a src-git nas https://github.com/linkease/nas-packages.git;master' feeds.conf.default
+sed -i '$a src-git nas_luci https://github.com/linkease/nas-packages-luci.git;main' feeds.conf.default
 
-git clone https://github.com/kenzok8/small-package package/small-package
+# git clone https://github.com/kenzok8/small-package package/small-package
