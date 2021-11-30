@@ -133,7 +133,19 @@ jobs:
         #  git clone -b $REPO_BRANCH --single-branch https://github.com/281677160/openwrt-package package/danshui
         # git clone -b 19.07 --single-branch https://github.com/281677160/openwrt-package package/danshui
         # fi
-        ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a
+        [ -e build/${{matrix.target}}/$CONFIG_FILE ]
+        mv build/${{matrix.target}}/$CONFIG_FILE .config
+        if [ ${{matrix.target}} == Lienol_x86_64 ]; then
+            rm -rf package/litte/adguardhome && rm -rf package/litte/luci-app-adguardhome
+            cp -f package/litte/commit/zzz-default-settings package/default-settings/files/zzz-default-settings
+            cp -f package/litte/commit/banner package/base-files/files/etc/banner
+        fi
+        if [ ${{matrix.target}} == Project_x86_64 ]; then
+            rm -rf package/litte/adguardhome && rm -rf package/litte/luci-app-adguardhome
+            cp -f package/litte/zzz-default-settings package/default-settings/files/zzz-default-settings
+            cp -f package/litte/banner package/base-files/files/etc/banner
+        fi
+        ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a  
         if [ -n "$(ls -A "build/${{matrix.target}}/patches" 2>/dev/null)" ]; then
           find "build/${{matrix.target}}/patches" -type f -name '*.patch' -print0 | sort -z | xargs -I % -t -0 -n 1 sh -c "cat '%'  | patch -d './' -p1 --forward --no-backup-if-mismatch"
         fi
