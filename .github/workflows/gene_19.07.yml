@@ -127,8 +127,8 @@ jobs:
           /bin/bash "build/${{matrix.target}}/$DIY_P1_SH"
         fi
         if [ ${{matrix.target}} != "openwrt" ]; then
-         git clone -b openwrt-18.06 --single-branch  https://github.com/immortalwrt/packages/ package/danshui
-          # git clone -b 19.07 --single-branch https://github.com/281677160/openwrt-package package/danshui
+         # git clone -b openwrt-18.06 --single-branch  https://github.com/immortalwrt/packages/ package/danshui
+          git clone -b 19.07 --single-branch https://github.com/281677160/openwrt-package package/danshui
            # cp -Rf package/* './openwrt' && rm -rf './openwrt/package'
         fi
         [ -e build/${{matrix.target}}/$CONFIG_FILE ]
