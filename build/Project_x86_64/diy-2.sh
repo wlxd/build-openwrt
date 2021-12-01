@@ -28,7 +28,7 @@
 
 # sed -i "s/OpenWrt /${Author} Compiled in $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" package/emortal/default-settings/files/zzz-default-settings  # 增加个性名字${Author}默认为你的github账号
 
-sed -i '/CYXluq4wUazHjmCDBCqXF/d' package/emortal/default-settings/files/zzz-default-settings   # 设置密码为空
+# sed -i '/CYXluq4wUazHjmCDBCqXF/d' package/emortal/default-settings/files/zzz-default-settings   # 设置密码为空
 
 #sed -i 's/PATCHVER:=4.19/PATCHVER:=4.14/g' target/linux/x86/Makefile                               # x86机型,默认内核4.19，修改内核为4.14或者4.9
 
