@@ -5,7 +5,7 @@
 # Copyright (C) 2019 P3TERX <https://p3terx.com>
 # <https://github.com/P3TERX/Actions-OpenWrt.git>
 #
-name: 编译Lieonl19.07固件
+name: 编译天灵18.06固件
 on:
   workflow_dispatch:
     inputs:
@@ -43,7 +43,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [Lienol_x86_64]
+        target: [Project_x86_64]
 
      # [Lede_x86_64,Lede_gl_mt300n_v2,Lede_nanopi_r2s,Lede_nanopi_r4s,Lede_newifi_d2,p2w_r619ac_128m,Lede_phicomm_k2p,Lede_phicomm_n1,Lede_redmi_ac2100,Lede_wankeyun,Lede_wndr3800,Lede_wndr4300_v1,Lede_wr703n_v1,Lede_xiaomi_r3pro,Lede_xiaoyu_c5,Lede_Raspberry_Pi4]
      
@@ -69,7 +69,7 @@ jobs:
         echo "CONFIG_FILE=${CONFIG_FILE}" >> $GITHUB_ENV
         echo "WXFB_MESSAGE=${WXFB_MESSAGE}" >> $GITHUB_ENV
         echo "DIY_P1_SH=${DIY_P1_SH}" >> $GITHUB_ENV
-        echo "DIY_P3_SH=${DIY_P3_SH}" >> $GITHUB_ENV
+        echo "DIY_P2_SH=${DIY_P2_SH}" >> $GITHUB_ENV
         echo "SSH_ACTIONS=${SSH_ACTIONS}" >> $GITHUB_ENV
         echo "UPLOAD_BIN_DIR=${UPLOAD_BIN_DIR}" >> $GITHUB_ENV
         echo "UPLOAD_CONFIG=${UPLOAD_CONFIG}" >> $GITHUB_ENV
@@ -78,7 +78,6 @@ jobs:
         echo "UPLOAD_RELEASE=${UPLOAD_RELEASE}" >> $GITHUB_ENV
         echo "SERVERCHAN_SCKEY=${SERVERCHAN_SCKEY}" >> $GITHUB_ENV
         echo "USE_CACHEWRTBUILD=${USE_CACHEWRTBUILD}" >> $GITHUB_ENV
-
     - name: 微信通知
       uses: emon100/Action-Serverchan@v2
       if: env.SERVERCHAN_SCKEY == 'true' || (github.event.inputs.wxtz == 'wxtz' && github.event.inputs.wxtz  != 'false')
@@ -104,14 +103,13 @@ jobs:
       run: |
         df -hT $PWD
         git clone -b $REPO_BRANCH --single-branch $REPO_URL openwrt
-        cd openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
-         ./scripts/feeds update -a > /dev/null 2>&1
+        cd openwrt
         if [ ${{matrix.target}} != openwrt ]; then
-          rm -rf package/lienol/luci-app-timecontrol
-          rm -rf package/ntlf9t/{smartdns,luci-app-smartdns}
-          rm -rf package/emortal/{luci-app-argon-config,luci-theme-argonv3}
-          rm -rf package/lean/{luci-app-netdata,luci-theme-argon,k3screenctrl}
+           rm -rf package/lienol/luci-app-timecontrol
+           rm -rf package/ntlf9t/{smartdns,luci-app-smartdns}
+           rm -rf package/ctcgfw/{luci-app-argon-config,luci-theme-argonv3}
+           rm -rf package/lean/{luci-app-netdata,luci-theme-argon,k3screenctrl}
         fi
         
     - name: 加载源,patch补丁和自定义设置
@@ -121,47 +119,44 @@ jobs:
         fi
         cp -Rf `find ./ -maxdepth 1 -type d ! -path './openwrt' ! -path './'` openwrt
         cd openwrt
-        if [ -f "build/${{matrix.target}}/$DIY_P3_SH" ]; then
-          chmod +x build/${{matrix.target}}/$DIY_P3_SH
-          /bin/bash "build/${{matrix.target}}/$DIY_P3_SH"
-        fi
         if [ -f "build/${{matrix.target}}/$DIY_P1_SH" ]; then
           chmod +x build/${{matrix.target}}/$DIY_P1_SH
           /bin/bash "build/${{matrix.target}}/$DIY_P1_SH"
         fi
-        # if [ ${{matrix.target}} != "openwrt" ]; then
-        #  git clone -b $REPO_BRANCH --single-branch https://github.com/281677160/openwrt-package package/danshui
-        # git clone -b 19.07 --single-branch https://github.com/281677160/openwrt-package package/danshui
-        # fi
+        if [ ${{matrix.target}} != "openwrt" ]; then
+          git clone -b $REPO_BRANCH --single-branch https://github.com/281677160/openwrt-package package/danshui
+        fi
+        if [[ "${Modelfile}" == "openwrt-18.06" ]]; then
+          echo "ZZZ=package/emortal/default-settings/files/zzz-default-settings" >> $GITHUB_ENV
+          echo "CODE=Mortal" >> $GITHUB_ENV
+          echo "OpenWrt_name=18.06" >> $GITHUB_ENV
+        fi
+        if [ ${{matrix.target}} == "Project_x86_64 " ]; then
+             [[ -e build/${{matrix.target}}/1806zzz-default-settings ]] && mv "-e build/${{matrix.target}}/1806zzz-default-settings" $ZZZ
+        fi
+        ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a
+        if [ -f "build/${{matrix.target}}/$DIY_P2_SH" ]; then
+          chmod +x build/${{matrix.target}}/$DIY_P2_SH
+          /bin/bash "build/${{matrix.target}}/$DIY_P2_SH"
+        fi
+        if [ -n "$(ls -A "build/${{matrix.target}}/patches" 2>/dev/null)" ]; then
+          find "build/${{matrix.target}}/patches" -type f -name '*.patch' -print0 | sort -z | xargs -I % -t -0 -n 1 sh -c "cat '%'  | patch -d './' -p1 --forward --no-backup-if-mismatch"
+        fi
+        if [ -n "$(ls -A "build/${{matrix.target}}/files" 2>/dev/null)" ]; then
+         cp -rf build/${{matrix.target}}/files files
+         chmod -R 777 build/${{matrix.target}}/files/* ./
+        fi
+        if [ -n "$(ls -A "build/${{matrix.target}}/diy" 2>/dev/null)" ]; then
+         cp -Rf build/${{matrix.target}}/diy/* ./
+        fi
         [ -e build/${{matrix.target}}/$CONFIG_FILE ]
         mv build/${{matrix.target}}/$CONFIG_FILE .config
-        if [ ${{matrix.target}} == Lienol_x86_64 ]; then
-            rm -rf package/litte/adguardhome && rm -rf package/litte/luci-app-adguardhome
-            cp -f package/litte/commit/zzz-default-settings package/default-settings/files/zzz-default-settings
-            cp -f package/litte/commit/banner package/base-files/files/etc/banner
-        fi
-        if [ ${{matrix.target}} == Project_x86_64 ]; then
-            rm -rf package/litte/adguardhome && rm -rf package/litte/luci-app-adguardhome
-            cp -f package/litte/zzz-default-settings package/default-settings/files/zzz-default-settings
-            cp -f package/litte/banner package/base-files/files/etc/banner
-        fi
-        ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a  
-        # if [ -n "$(ls -A "build/${{matrix.target}}/patches" 2>/dev/null)" ]; then
-          # find "build/${{matrix.target}}/patches" -type f -name '*.patch' -print0 | sort -z | xargs -I % -t -0 -n 1 sh -c "cat '%'  | patch -d './' -p1 --forward --no-backup-if-mismatch"
-        # fi
-        # if [ -n "$(ls -A "build/${{matrix.target}}/files" 2>/dev/null)" ]; then
-         # cp -rf build/${{matrix.target}}/files files
-         # chmod -R 777 build/${{matrix.target}}/files/* ./
-        # fi
-        # if [ -n "$(ls -A "build/${{matrix.target}}/diy" 2>/dev/null)" ]; then
-         # cp -Rf build/${{matrix.target}}/diy/* ./
-        # fi
         if [ $REPO_URL == "https://github.com/coolsnowwolf/lede" ]; then
          echo "NAME2=Lede-" >> $GITHUB_ENV
          echo "ZUOZHE=lean" >> $GITHUB_ENV
-        # elif [ $REPO_URL == "https://github.com/Lienol/openwrt" ]; then
-        #  echo "NAME2=Lienol-" >> $GITHUB_ENV
-        #  echo "ZUOZHE=lienol" >> $GITHUB_ENV
+        elif [ $REPO_URL == "https://github.com/Lienol/openwrt" ]; then
+         echo "NAME2=Lienol-" >> $GITHUB_ENV
+         echo "ZUOZHE=lienol" >> $GITHUB_ENV
         elif [ $REPO_URL == "https://github.com/project-openwrt/openwrt" ]; then
          echo "NAME2=Project-" >> $GITHUB_ENV
          echo "ZUOZHE=CTCGFW" >> $GITHUB_ENV
@@ -173,10 +168,10 @@ jobs:
         pushd po2lmo
         make && sudo make install
         popd
- 
+        
     - name: 缓存加速(7天内对应源码相同机型二次编译有效，每次只保留一个源码的缓存)
       if: env.USE_CACHEWRTBUILD == 'true'
-      uses: klever1988/cachewrtbuild@main
+      uses: klever1988/cachewrtbuild@test
       with:
         ccache: 'true'
         prefix: ${{ github.workspace }}/openwrt
@@ -202,7 +197,7 @@ jobs:
       run: |
         cd openwrt
         echo -e "$(($(nproc)+1)) thread compile"
-        make -j$(($(nproc)+1)) V=s || make -j1 V=s
+        make -j$(($(nproc)+1)) || make -j1 V=s
         echo "::set-output name=status::success"
         echo "date=$(date "+%y.%m.%d-%H%M")" >> $GITHUB_ENV
         echo "date1=$(date "+%Y年%m月%d号-%H点%M分")" >> $GITHUB_ENV
@@ -217,7 +212,6 @@ jobs:
          grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > NAME1
          [ -s NAME1 ] && echo "NAME1=$(cat NAME1)" >> $GITHUB_ENV
         fi
-       
     - name: 上传bin文件夹(固件+ipk)在github空间
       uses: actions/upload-artifact@v2
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
