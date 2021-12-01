@@ -116,9 +116,6 @@ jobs:
         
     - name: 加载源,patch补丁和自定义设置
       run: |
-        if [ ${{matrix.target}} == "Lede_phicomm_n1" -o ${{matrix.target}} == "Project_phicomm_n1" ];then
-          svn co https://github.com/281677160/N1/trunk reform
-        fi
         cp -Rf `find ./ -maxdepth 1 -type d ! -path './openwrt' ! -path './'` openwrt
         cd openwrt
         if [ -f "build/${{matrix.target}}/$DIY_P3_SH" ]; then
@@ -133,19 +130,22 @@ jobs:
         #  git clone -b $REPO_BRANCH --single-branch https://github.com/281677160/openwrt-package package/danshui
         # git clone -b 19.07 --single-branch https://github.com/281677160/openwrt-package package/danshui
         # fi
-        [ -e build/${{matrix.target}}/$CONFIG_FILE ]
-        mv build/${{matrix.target}}/$CONFIG_FILE .config
         if [ ${{matrix.target}} == Lienol_x86_64 ]; then
+            git clone https://github.com/kenzok8/litte package/litte
+            git clone https://github.com/xiaorouji/openwrt-passwall package/passwall
             rm -rf package/litte/adguardhome && rm -rf package/litte/luci-app-adguardhome
             cp -f package/litte/commit/zzz-default-settings package/default-settings/files/zzz-default-settings
             cp -f package/litte/commit/banner package/base-files/files/etc/banner
+            [ -e build/${{matrix.target}}/$CONFIG_FILE ]
+            mv build/${{matrix.target}}/$CONFIG_FILE .config
         fi
         if [ ${{matrix.target}} == Project_x86_64 ]; then
             rm -rf package/litte/adguardhome && rm -rf package/litte/luci-app-adguardhome
             cp -f package/litte/zzz-default-settings package/default-settings/files/zzz-default-settings
             cp -f package/litte/banner package/base-files/files/etc/banner
         fi
-        ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a  
+        # ./scripts/feeds clean && 
+        ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a
         # if [ -n "$(ls -A "build/${{matrix.target}}/patches" 2>/dev/null)" ]; then
           # find "build/${{matrix.target}}/patches" -type f -name '*.patch' -print0 | sort -z | xargs -I % -t -0 -n 1 sh -c "cat '%'  | patch -d './' -p1 --forward --no-backup-if-mismatch"
         # fi
