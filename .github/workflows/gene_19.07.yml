@@ -69,7 +69,7 @@ jobs:
         echo "CONFIG_FILE=${CONFIG_FILE}" >> $GITHUB_ENV
         echo "WXFB_MESSAGE=${WXFB_MESSAGE}" >> $GITHUB_ENV
         echo "DIY_P1_SH=${DIY_P1_SH}" >> $GITHUB_ENV
-        echo "DIY_P3_SH=${DIY_P3_SH}" >> $GITHUB_ENV
+        echo "DIY_P2_SH=${DIY_P2_SH}" >> $GITHUB_ENV
         echo "SSH_ACTIONS=${SSH_ACTIONS}" >> $GITHUB_ENV
         echo "UPLOAD_BIN_DIR=${UPLOAD_BIN_DIR}" >> $GITHUB_ENV
         echo "UPLOAD_CONFIG=${UPLOAD_CONFIG}" >> $GITHUB_ENV
@@ -107,12 +107,12 @@ jobs:
         git clone -b $REPO_BRANCH --single-branch $REPO_URL openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         cd openwrt
-        # if [ ${{matrix.target}} != openwrt ]; then
-         # rm -rf package/lienol/luci-app-timecontrol
-         # rm -rf package/ntlf9t/{smartdns,luci-app-smartdns}
-         # rm -rf package/emortal/{luci-app-argon-config,luci-theme-argonv3}
-         # rm -rf package/lean/{luci-app-netdata,luci-theme-argon,k3screenctrl}
-        # fi
+        if [ ${{matrix.target}} != openwrt ]; then
+         rm -rf package/lienol/luci-app-timecontrol
+         rm -rf package/ntlf9t/{smartdns,luci-app-smartdns}
+         rm -rf package/emortal/{luci-app-argon-config,luci-theme-argonv3}
+         rm -rf package/lean/{luci-app-netdata,luci-theme-argon,k3screenctrl}
+        fi
         ./scripts/feeds update -a
         ./scripts/feeds install -a
         ./scripts/feeds install -a
@@ -135,30 +135,35 @@ jobs:
           # git clone -b 19.07 --single-branch https://github.com/281677160/openwrt-package package/danshui
            # cp -Rf package/* './openwrt' && rm -rf './openwrt/package'
         # fi
+        if [ -f "build/${{matrix.target}}/$DIY_P1_SH" ]; then
+          chmod +x build/${{matrix.target}}/$DIY_P1_SH
+          /bin/bash "build/${{matrix.target}}/$DIY_P1_SH"
+        fi
         [ -e build/${{matrix.target}}/$CONFIG_FILE ]
         mv build/${{matrix.target}}/$CONFIG_FILE .config
-        if [ ${{matrix.target}} == Lienol_x86_64 ]; then
-            rm -rf package/litte/adguardhome && rm -rf package/litte/luci-app-adguardhome
-            cp -f package/litte/commit/zzz-default-settings package/default-settings/files/zzz-default-settings
-            cp -f package/litte/commit/banner package/base-files/files/etc/banner
-        fi
-        if [ ${{matrix.target}} == Project_x86_64 ]; then
-            rm -rf package/litte/adguardhome && rm -rf package/litte/luci-app-adguardhome
-            cp -f package/litte/zzz-default-settings package/default-settings/files/zzz-default-settings
-            cp -f package/litte/banner package/base-files/files/etc/banner
-        fi
+        
+        # if [ ${{matrix.target}} == Lienol_x86_64 ]; then
+            # rm -rf package/litte/adguardhome && rm -rf package/litte/luci-app-adguardhome
+            # cp -f package/litte/commit/zzz-default-settings package/default-settings/files/zzz-default-settings
+            # cp -f package/litte/commit/banner package/base-files/files/etc/banner
+        # fi
+        # if [ ${{matrix.target}} == Project_x86_64 ]; then
+            # rm -rf package/litte/adguardhome && rm -rf package/litte/luci-app-adguardhome
+            # cp -f package/litte/zzz-default-settings package/default-settings/files/zzz-default-settings
+            # cp -f package/litte/banner package/base-files/files/etc/banner
+        # fi
         ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a        
-        # if [ -n "$(ls -A "build/${{matrix.target}}/patches" 2>/dev/null)" ]; then
-          # find "build/${{matrix.target}}/patches" -type f -name '*.patch' -print0 | sort -z | xargs -I % -t -0 -n 1 sh -c "cat '%'  | patch -d './' -p1 --forward --no-backup-if-mismatch"
-        # fi
-        # if [ -n "$(ls -A "build/${{matrix.target}}/files" 2>/dev/null)" ]; then
-         # cp -rf build/${{matrix.target}}/files files
-         # chmod -R 777 build/${{matrix.target}}/files/* ./
-        # fi
-        # if [ -n "$(ls -A "build/${{matrix.target}}/diy" 2>/dev/null)" ]; then
-         # cp -Rf build/${{matrix.target}}/diy/* ./
-         # cp -Rf build/${{matrix.target}}/package/* ./ && rm -rf build/${{matrix.target}}/package
-        # fi
+        if [ -n "$(ls -A "build/${{matrix.target}}/patches" 2>/dev/null)" ]; then
+          find "build/${{matrix.target}}/patches" -type f -name '*.patch' -print0 | sort -z | xargs -I % -t -0 -n 1 sh -c "cat '%'  | patch -d './' -p1 --forward --no-backup-if-mismatch"
+        fi
+        if [ -n "$(ls -A "build/${{matrix.target}}/files" 2>/dev/null)" ]; then
+         cp -rf build/${{matrix.target}}/files files
+         chmod -R 777 build/${{matrix.target}}/files/* ./
+        fi
+        if [ -n "$(ls -A "build/${{matrix.target}}/diy" 2>/dev/null)" ]; then
+         cp -Rf build/${{matrix.target}}/diy/* ./
+         cp -Rf build/${{matrix.target}}/package/* ./ && rm -rf build/${{matrix.target}}/package
+        fi
         #  ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a
          
 
@@ -172,13 +177,13 @@ jobs:
          echo "NAME2=Project-" >> $GITHUB_ENV
          echo "ZUOZHE=CTCGFW" >> $GITHUB_ENV
         fi
-        # rm -rf {LICENSE,README,README.md}
-        # rm -rf ./*/{LICENSE,README,README.md}
-        # rm -rf ./*/*/{LICENSE,README,README.md}
-        # git clone https://github.com/openwrt-dev/po2lmo.git
-        # pushd po2lmo
-        # make && sudo make install
-        # popd
+        rm -rf {LICENSE,README,README.md}
+        rm -rf ./*/{LICENSE,README,README.md}
+        rm -rf ./*/*/{LICENSE,README,README.md}
+        git clone https://github.com/openwrt-dev/po2lmo.git
+        pushd po2lmo
+        make && sudo make install
+        popd
         
         
     - name: 缓存加速(7天内对应源码相同机型二次编译有效，每次只保留一个源码的缓存)
