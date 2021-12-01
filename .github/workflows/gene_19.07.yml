@@ -135,13 +135,11 @@ jobs:
           # git clone -b 19.07 --single-branch https://github.com/281677160/openwrt-package package/danshui
            # cp -Rf package/* './openwrt' && rm -rf './openwrt/package'
         # fi
+         ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a 
         if [ -f "build/${{matrix.target}}/$DIY_P2_SH" ]; then
           chmod +x build/${{matrix.target}}/$DIY_P2_SH
           /bin/bash "build/${{matrix.target}}/$DIY_P2_SH"
-        fi
-        [ -e build/${{matrix.target}}/$CONFIG_FILE ]
-        mv build/${{matrix.target}}/$CONFIG_FILE .config
-        
+        fi        
         # if [ ${{matrix.target}} == Lienol_x86_64 ]; then
             # rm -rf package/litte/adguardhome && rm -rf package/litte/luci-app-adguardhome
             # cp -f package/litte/commit/zzz-default-settings package/default-settings/files/zzz-default-settings
@@ -152,7 +150,7 @@ jobs:
             # cp -f package/litte/zzz-default-settings package/default-settings/files/zzz-default-settings
             # cp -f package/litte/banner package/base-files/files/etc/banner
         # fi
-        ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a        
+       
         if [ -n "$(ls -A "build/${{matrix.target}}/patches" 2>/dev/null)" ]; then
           find "build/${{matrix.target}}/patches" -type f -name '*.patch' -print0 | sort -z | xargs -I % -t -0 -n 1 sh -c "cat '%'  | patch -d './' -p1 --forward --no-backup-if-mismatch"
         fi
@@ -164,9 +162,8 @@ jobs:
          cp -Rf build/${{matrix.target}}/diy/* ./
          cp -Rf build/${{matrix.target}}/package/* ./ && rm -rf build/${{matrix.target}}/package
         fi
-        #  ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a
-         
-
+        [ -e build/${{matrix.target}}/$CONFIG_FILE ]
+        mv build/${{matrix.target}}/$CONFIG_FILE .config
         if [ $REPO_URL == "https://github.com/coolsnowwolf/lede" ]; then
          echo "NAME2=Lede-" >> $GITHUB_ENV
          echo "ZUOZHE=lean" >> $GITHUB_ENV
