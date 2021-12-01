@@ -135,9 +135,9 @@ jobs:
           # git clone -b 19.07 --single-branch https://github.com/281677160/openwrt-package package/danshui
            # cp -Rf package/* './openwrt' && rm -rf './openwrt/package'
         # fi
-        if [ -f "build/${{matrix.target}}/$DIY_P1_SH" ]; then
-          chmod +x build/${{matrix.target}}/$DIY_P1_SH
-          /bin/bash "build/${{matrix.target}}/$DIY_P1_SH"
+        if [ -f "build/${{matrix.target}}/$DIY_P2_SH" ]; then
+          chmod +x build/${{matrix.target}}/$DIY_P2_SH
+          /bin/bash "build/${{matrix.target}}/$DIY_P2_SH"
         fi
         [ -e build/${{matrix.target}}/$CONFIG_FILE ]
         mv build/${{matrix.target}}/$CONFIG_FILE .config
