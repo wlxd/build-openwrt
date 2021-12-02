@@ -182,13 +182,6 @@ jobs:
         make && sudo make install
         popd
         
-    - name: 缓存加速(7天内对应源码相同机型二次编译有效，每次只保留一个源码的缓存)
-      if: env.USE_CACHEWRTBUILD == 'true'
-      uses: klever1988/cachewrtbuild@main
-      with:
-        ccache: 'true'
-        prefix: ${{ github.workspace }}/openwrt
-        
     - name: SSH远程连接（若打开了此功能,在此转圈2分钟还展开不了,请看《SSH连接教程》）
       uses: danshui-git/debugger-action@master
       if: env.SSH_ACTIONS == 'true' || (github.event.inputs.ssh == 'ssh' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
