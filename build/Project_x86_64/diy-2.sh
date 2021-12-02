@@ -4,7 +4,7 @@
 
 #以后要升级gli-300nv2直接编译这个文件就可以了其他不用改动，实验性编译都用另外的文件编译
 # 修改openwrt登陆地址,把下面的192.168.2.2修改成你想要的就可以了
-sed -i 's/192.168.1.1/192.168.3.1/g' package/base-files/files/bin/config_generate
+# sed -i 's/192.168.1.1/192.168.3.1/g' package/base-files/files/bin/config_generate
 
 # 修改主机名字，把OpenWrt-123修改你喜欢的就行（不能纯数字或者使用中文）
 # sed -i '/uci commit system/i\uci set system.@system[0].hostname='CSCLEDE'' package/lean/default-settings/files/zzz-default-settings
@@ -13,7 +13,7 @@ sed -i 's/192.168.1.1/192.168.3.1/g' package/base-files/files/bin/config_generat
 # sed -i "s/ImmortalWrt 18.06 /kkitown build $(TZ=UTC-8 date "+%Y.%m.%d") @ ImmortalWrt 18.06 /g" package/lean/default-settings/files/zzz-default-settings
 
 # 设置密码为空（安装固件时无需密码登陆，然后自己修改想要的密码）
-sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g' package/lean/default-settings/files/zzz-default-settings
+# sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g' package/lean/default-settings/files/zzz-default-settings
 
 # 修改内核版本（版本内核默认4.19，还有4.14跟4.9内核）以下代码都无法正常切换
 # sed -i 's/KERNEL_PATCHVER:=4.14/KERNEL_PATCHVER:=4.19/g' target/linux/x86/Makefile
