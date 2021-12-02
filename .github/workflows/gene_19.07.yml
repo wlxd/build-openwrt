@@ -134,11 +134,7 @@ jobs:
           # git clone -b 19.07 --single-branch https://github.com/281677160/openwrt-package package/danshui
            # cp -Rf package/* './openwrt' && rm -rf './openwrt/package'
         # fi
-          if [ ${{matrix.target}} != "openwrt" ]; then
-              git clone https://github.com/kenzok8/litte package/litte
-              git clone https://github.com/xiaorouji/openwrt-passwall package/passwall
-        　fi
-            ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a 
+          ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a 
         # if [ ${{matrix.target}} == Lienol_x86_64 ]; then
             # rm -rf package/litte/adguardhome && rm -rf package/litte/luci-app-adguardhome
             # cp -f package/litte/commit/zzz-default-settings package/default-settings/files/zzz-default-settings
