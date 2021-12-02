@@ -116,7 +116,6 @@ jobs:
         ./scripts/feeds update -a
         ./scripts/feeds install -a
         ./scripts/feeds install -a
-
          
     - name: 加载源,patch补丁和自定义设置
       run: |
@@ -186,7 +185,6 @@ jobs:
         pushd po2lmo
         make && sudo make install
         popd
-        
         
     - name: 缓存加速(7天内对应源码相同机型二次编译有效，每次只保留一个源码的缓存)
       if: env.USE_CACHEWRTBUILD == 'true'
