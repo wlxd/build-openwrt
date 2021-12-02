@@ -136,10 +136,10 @@ jobs:
            # cp -Rf package/* './openwrt' && rm -rf './openwrt/package'
         # fi
           if [ ${{matrix.target}} != "openwrt" ]; then
-         　　git clone https://github.com/kenzok8/litte package/litte
-           　git clone https://github.com/xiaorouji/openwrt-passwall package/passwall
+              git clone https://github.com/kenzok8/litte package/litte
+              git clone https://github.com/xiaorouji/openwrt-passwall package/passwall
         　fi
-         ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a 
+            ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a 
         # if [ ${{matrix.target}} == Lienol_x86_64 ]; then
             # rm -rf package/litte/adguardhome && rm -rf package/litte/luci-app-adguardhome
             # cp -f package/litte/commit/zzz-default-settings package/default-settings/files/zzz-default-settings
@@ -147,17 +147,15 @@ jobs:
             # [ -e build/${{matrix.target}}/$CONFIG_FILE ]
             # mv build/${{matrix.target}}/$CONFIG_FILE .config
         # fi
-        
-        if [ -f "build/${{matrix.target}}/$DIY_P2_SH" ]; then
-          chmod +x build/${{matrix.target}}/$DIY_P2_SH
-          /bin/bash "build/${{matrix.target}}/$DIY_P2_SH"
-        fi   
+          if [ -f "build/${{matrix.target}}/$DIY_P2_SH" ]; then
+             chmod +x build/${{matrix.target}}/$DIY_P2_SH
+             /bin/bash "build/${{matrix.target}}/$DIY_P2_SH"
+          fi   
         # if [ ${{matrix.target}} == Project_x86_64 ]; then
             # rm -rf package/litte/adguardhome && rm -rf package/litte/luci-app-adguardhome
             # cp -f package/litte/zzz-default-settings package/default-settings/files/zzz-default-settings
             # cp -f package/litte/banner package/base-files/files/etc/banner
         # fi
-       
         if [ -n "$(ls -A "build/${{matrix.target}}/patches" 2>/dev/null)" ]; then
           find "build/${{matrix.target}}/patches" -type f -name '*.patch' -print0 | sort -z | xargs -I % -t -0 -n 1 sh -c "cat '%'  | patch -d './' -p1 --forward --no-backup-if-mismatch"
         fi
