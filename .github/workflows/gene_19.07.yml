@@ -136,15 +136,18 @@ jobs:
            # cp -Rf package/* './openwrt' && rm -rf './openwrt/package'
         # fi
          ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a 
+        if [ ${{matrix.target}} == Lienol_x86_64 ]; then
+            rm -rf package/litte/adguardhome && rm -rf package/litte/luci-app-adguardhome
+            cp -f package/litte/commit/zzz-default-settings package/default-settings/files/zzz-default-settings
+            cp -f package/litte/commit/banner package/base-files/files/etc/banner
+            [ -e build/${{matrix.target}}/$CONFIG_FILE ]
+            mv build/${{matrix.target}}/$CONFIG_FILE .config
+        fi
+        
         if [ -f "build/${{matrix.target}}/$DIY_P2_SH" ]; then
           chmod +x build/${{matrix.target}}/$DIY_P2_SH
           /bin/bash "build/${{matrix.target}}/$DIY_P2_SH"
-        fi        
-        # if [ ${{matrix.target}} == Lienol_x86_64 ]; then
-            # rm -rf package/litte/adguardhome && rm -rf package/litte/luci-app-adguardhome
-            # cp -f package/litte/commit/zzz-default-settings package/default-settings/files/zzz-default-settings
-            # cp -f package/litte/commit/banner package/base-files/files/etc/banner
-        # fi
+        fi   
         # if [ ${{matrix.target}} == Project_x86_64 ]; then
             # rm -rf package/litte/adguardhome && rm -rf package/litte/luci-app-adguardhome
             # cp -f package/litte/zzz-default-settings package/default-settings/files/zzz-default-settings
