@@ -13,8 +13,8 @@
 # 添加 京东签到,这个无法添加，暂时未解决
  # svn co https://github.com/jerrykuku/luci-app-jd-dailybonus/trunk package/diy/luci-app-jd-dailybonus  #京东签到
  
-git clone https://github.com/kenzok78/jeii package/jeii
-# git clone https://github.com/kenzok8/jell package/jell
+# git clone https://github.com/kenzok78/jeii package/jeii
+git clone https://github.com/kenzok8/jell package/jell
  
  # 添加ddnsto成功, 
  # 天灵的源码自带ddnsto但是需要手动开启，所以也不需要额外添加了，但是没有gowebdav
