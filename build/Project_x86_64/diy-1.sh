@@ -18,9 +18,9 @@
  
  # 添加ddnsto成功, 
  # 天灵的源码自带ddnsto但是需要手动开启，所以也不需要额外添加了，但是没有gowebdav
- # sed -i '$a src-git nas https://github.com/linkease/nas-packages.git;master' feeds.conf.default
- # sed -i '$a src-git nas_luci https://github.com/linkease/nas-packages-luci.git;main' feeds.conf.default
+sed -i '$a src-git nas https://github.com/linkease/nas-packages.git;master' feeds.conf.default
+sed -i '$a src-git nas_luci https://github.com/linkease/nas-packages-luci.git;main' feeds.conf.default
+
  # sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
- 
  # svn co https://github.com/Lienol/openwrt/trunk/package/default-settings package/emortal/default-settings
 
