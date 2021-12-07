@@ -4,7 +4,7 @@
 
 #以后要升级gli-300nv2直接编译这个文件就可以了其他不用改动，实验性编译都用另外的文件编译
 # 修改openwrt登陆地址,把下面的192.168.2.2修改成你想要的就可以了
-sed -i 's/192.168.1.1/192.168.3.2/g' package/base-files/files/bin/config_generate
+# sed -i 's/192.168.1.1/192.168.3.2/g' package/base-files/files/bin/config_generate
 
 # 修改主机名字，把OpenWrt-123修改你喜欢的就行（不能纯数字或者使用中文）
 # sed -i '/uci commit system/i\uci set system.@system[0].hostname='CSCLEDE'' package/emortal/default-settings/files/zzz-default-settings
