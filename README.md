@@ -3,7 +3,7 @@
 
 去掉了naiveproxy之后固件缩减了2M，好吧，那就删了它吧，其他都保留，轻量精简13.3M！！！  
 
-Lede 和 Lieonl开始出现一些分支，主要是因为 Leionl 是以官方OpenWrt为基准更新，最近官方OpenWrt切换到了wolfssl，目前ssr plus 仍然以openssl为依赖，但是如果你两个都添加也没必要，除了会增加固体积还可能会出错，所以，目前的情况是在 Lieonl 编译的时候需要手动选中 LuCI->Collection 中选中 wolfssl即可正常出现ssr plus；Lede 和 Immortal的固件一样都是默认openssl，所以也不需要额外关注。  
+Lede 和 Lieonl开始出现一些分支，主要是因为 Leionl 是以官方OpenWrt为基准更新，最近官方OpenWrt切换到了wolfssl，目前ssr plus 仍然以openssl为依赖，但是如果你两个都添加也没必要，除了会增加固体积还可能会出错，所以，目前的情况是在 Lieonl 编译的时候需要手动选中 LuCI->Collection 中选中 wolfssl即可正常出现ssr plus；Lede 和 Immortal的固件一样都是默认openssl，所以也不需要额外关注。    
 试过了，如果在Lede和天灵中都选择为wolfssl,编译的配置仍旧需要openssl，所以那就直接openssl算了；  
 
 
