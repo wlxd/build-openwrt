@@ -3,7 +3,7 @@
 > git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"  
 > git config --global user.name "github-actions[bot]"  
 
-好了，Back to noraml!  
+好了，Back to normal!  
 
 
 终于折腾好了，12082021编译的应该没有问题，亲测天灵的也可以了，天灵的是在强制修改为天灵源码中默认自带的zzz-defaullt-settings配置就一切正常了！套用其他人的就会出现各种问题！
