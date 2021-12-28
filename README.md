@@ -1,3 +1,10 @@
+122721
+云编译提示报错 error: RPC failed; curl 56 GnuTLS recv error (-54) 相关错误，在拉取的时候添加actions认证即可；
+
+git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+git config --global user.name "github-actions[bot]"
+
+
 终于折腾好了，12082021编译的应该没有问题，亲测天灵的也可以了，天灵的是在强制修改为天灵源码中默认自带的zzz-defaullt-settings配置就一切正常了！套用其他人的就会出现各种问题！
 集成了automount、DDNSTO和webdav，15.3M基本算是满了，因为mini是15.5M 真坑！你可以愉快的使用USB来穿透了。  
 
