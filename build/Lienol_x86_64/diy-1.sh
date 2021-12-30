@@ -56,6 +56,7 @@
 #　svn co https://github.com/immortalwrt/packages/trunk/net/pdnsd-alt package/helloworld/pdnsd-alt
 #　svn co https://github.com/immortalwrt/packages/trunk/net/redsocks2 package/helloworld/redsocks2
 
+#最好不要替换，替换后固件会变慢！
 # rm -rf feeds/packages/libs/libcap
 # svn co https://github.com/openwrt/packages/branches/openwrt-21.02/libs/libcap/ feeds/packages/libs/libcap
 
