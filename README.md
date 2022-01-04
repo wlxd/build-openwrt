@@ -1,3 +1,6 @@
+
+xray 1.5.0千万不要用，程序记录日志出现一堆错误并且导致用了很久的vps被封！
+
 122721  
 云编译提示报错 *error: RPC failed; curl 56 GnuTLS recv error (-54)* 相关错误，在拉取的时候添加actions认证即可；  
 > git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"  
