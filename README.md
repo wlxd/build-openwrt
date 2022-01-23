@@ -2,10 +2,10 @@
 
 CONFIG_XRAY_CORE_COMPRESS_UPX=y
 
-CONFIG_boost-compile-visibility-hidden=y
-CONFIG_boost-runtime-shared=y
-CONFIG_boost-static-and-shared-libs=y
-CONFIG_boost-variant-release=y
+CONFIG_boost-compile-visibility-hidden=y  
+CONFIG_boost-runtime-shared=y  
+CONFIG_boost-static-and-shared-libs=y  
+CONFIG_boost-variant-release=y  
 
 
 
