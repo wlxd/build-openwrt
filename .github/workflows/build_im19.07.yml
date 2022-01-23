@@ -110,12 +110,12 @@ jobs:
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         cd openwrt
-        if [ ${{matrix.target}} != openwrt ]; then
-           rm -rf package/lienol/luci-app-timecontrol
-           rm -rf package/ntlf9t/{smartdns,luci-app-smartdns}
-           rm -rf package/ctcgfw/{luci-app-argon-config,luci-theme-argonv3}
-           rm -rf package/lean/{luci-app-netdata,luci-theme-argon,k3screenctrl}
-        fi
+        # if [ ${{matrix.target}} != openwrt ]; then
+           # rm -rf package/lienol/luci-app-timecontrol
+           # rm -rf package/ntlf9t/{smartdns,luci-app-smartdns}
+           # rm -rf package/ctcgfw/{luci-app-argon-config,luci-theme-argonv3}
+           # rm -rf package/lean/{luci-app-netdata,luci-theme-argon,k3screenctrl}
+        # fi
         
     - name: 加载源,patch补丁和自定义设置
       run: |
@@ -131,7 +131,7 @@ jobs:
         #if [ ${{matrix.target}} != "openwrt" ]; then
           #git clone -b $REPO_BRANCH --single-branch https://github.com/281677160/openwrt-package package/danshui
         #fi
-        ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a
+        ./scripts/feeds update -a && ./scripts/feeds install -a
         if [ -f "build/${{matrix.target}}/$DIY_P2_SH" ]; then
           chmod +x build/${{matrix.target}}/$DIY_P2_SH
           /bin/bash "build/${{matrix.target}}/$DIY_P2_SH"
