@@ -118,8 +118,8 @@ jobs:
          rm -rf package/emortal/{luci-app-argon-config,luci-theme-argonv3}
          rm -rf package/lean/{luci-app-netdata,luci-theme-argon,k3screenctrl}
         fi
-        ./scripts/feeds update -a
-        ./scripts/feeds install -a
+        # ./scripts/feeds update -a
+        # ./scripts/feeds install -a
          
     - name: 加载源,patch补丁和自定义设置
       run: |
@@ -138,7 +138,8 @@ jobs:
           # git clone -b 19.07 --single-branch https://github.com/281677160/openwrt-package package/danshui
            # cp -Rf package/* './openwrt' && rm -rf './openwrt/package'
         # fi
-          ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a 
+          # ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a 
+            ./scripts/feeds update -a && ./scripts/feeds install -a
         # if [ ${{matrix.target}} == Lienol_x86_64 ]; then
             # rm -rf package/litte/adguardhome && rm -rf package/litte/luci-app-adguardhome
             # cp -f package/litte/commit/zzz-default-settings package/default-settings/files/zzz-default-settings
