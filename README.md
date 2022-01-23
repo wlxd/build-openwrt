@@ -1,3 +1,13 @@
+加上了最后一句压缩xray_core效果明显， 14M变为13.3M,Lieonl 和 天灵的都是，但是加上另外四句之后Lieonl体积增加了到了13.9M，但是天灵依旧13.3M，所以xray_core 压缩很重要！
+
+CONFIG_XRAY_CORE_COMPRESS_UPX=y
+
+CONFIG_boost-compile-visibility-hidden=y
+CONFIG_boost-runtime-shared=y
+CONFIG_boost-static-and-shared-libs=y
+CONFIG_boost-variant-release=y
+
+
 
 xray 1.5.0千万不要用，程序记录日志出现一堆错误并且导致用了很久的vps被封！
 
