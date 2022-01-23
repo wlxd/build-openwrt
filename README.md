@@ -6,8 +6,7 @@ CONFIG_boost-compile-visibility-hidden=y
 CONFIG_boost-runtime-shared=y  
 CONFIG_boost-static-and-shared-libs=y  
 CONFIG_boost-variant-release=y  
-
-
+并且根据搜索的结果，LEDE的固件有后四句，Lieonl的没有见过，所以暂时后四句加载天灵、lede的固件中！
 
 xray 1.5.0千万不要用，程序记录日志出现一堆错误并且导致用了很久的vps被封！
 
