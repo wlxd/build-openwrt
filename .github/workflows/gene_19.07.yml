@@ -212,6 +212,7 @@ jobs:
         else
           echo "TARGET_PROFILE=armvirt" >> $GITHUB_ENV
         fi
+        echo "Compile_Date=$(date +'%m.%d.%H')" >> $GITHUB_ENV
         
     - name: 上传.config配置文件在github空间
       uses: actions/upload-artifact@v2
