@@ -139,7 +139,8 @@ jobs:
           # svn co https://github.com/Lienol/openwrt/trunk/package/default-settings package/emortal/default-settings             
           chmod 755 "build/${{matrix.target}}/1806zzz-default-settings2" && cp -Rf "build/${{matrix.target}}/1806zzz-default-settings2" package/emortal/default-settings/files/zzz-default-settings  
         fi
-        ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a
+          # ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a
+          ./scripts/feeds update -a && ./scripts/feeds install -a
         if [ -f "build/${{matrix.target}}/$DIY_P2_SH" ]; then
           chmod +x build/${{matrix.target}}/$DIY_P2_SH
           /bin/bash "build/${{matrix.target}}/$DIY_P2_SH"
