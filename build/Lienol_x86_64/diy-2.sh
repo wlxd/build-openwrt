@@ -19,6 +19,9 @@ sed -i 's/192.168.1.1/192.168.3.2/g' package/base-files/files/bin/config_generat
 # 删除lionl自带
 # rm -rf package/lean/luci-app-sfe
 # rm -rf package/lean/luci-app-flowoffload
+# 删除small自带的音乐插件，因为我这里不能用
+rm -rf package/small-package/UnblockNeteaseMusic
+rm -rf package/small-package/UnblockNeteaseMusic-Go
 
 # cp -Rf "${Home}"/build/common/LIENOL/diy/* "${Home}"
 
