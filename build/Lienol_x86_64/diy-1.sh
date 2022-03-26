@@ -75,5 +75,4 @@ git clone https://github.com/immortalwrt-collections/openwrt-gowebdav package/di
 # sed -i '$a src-git nas_luci https://github.com/linkease/nas-packages-luci.git;main' feeds.conf.default
 
   git clone https://github.com/kenzok8/small-package package/small-package
-  git clone https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic.git package/diy/luci-app-unblockneteasemusic
 
