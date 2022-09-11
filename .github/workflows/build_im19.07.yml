@@ -108,9 +108,6 @@ jobs:
       with:
         go-version: 1.18
         check-latest: true
-        
-    - name: Get project dependencies
-      run: go mod download
 
     - name: 下载${{matrix.target}}源码
       working-directory: /workdir
