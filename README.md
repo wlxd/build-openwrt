@@ -1,4 +1,4 @@
-09112022 Lieonl大的19.07在编译xray时需要go1.18，在diysh2中进行了官方替换正常通过了。
+09112022 Lieonl大的19.07在编译xray时需要go1.18，在diysh2中进行了官方替换正常通过了。https://github.com/coolsnowwolf/lede/issues/5719
 
 加上了最后一句压缩xray_core效果明显， 14M变为13.3M,Lieonl 和 天灵的都是，但是加上另外四句之后Lieonl体积增加了到了13.9M，但是天灵依旧13.3M，所以xray_core 压缩很重要！
 
