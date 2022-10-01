@@ -19,19 +19,19 @@ svn co https://github.com/ophub/luci-app-amlogic/trunk package/luci-app-amlogic
 echo "iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE" >> package/network/config/firewall/files/firewall.user
 
 # Add luci-app-ssr-plus
-pushd package/lean
-git clone --depth=1 https://github.com/fw876/helloworld
-cat > helloworld/luci-app-ssr-plus/root/etc/ssrplus/black.list << EOF
-services.googleapis.cn
-googleapis.cn
-heroku.com
-githubusercontent.com 
-EOF
-popd
+# pushd package/lean
+# git clone --depth=1 https://github.com/fw876/helloworld
+# cat > helloworld/luci-app-ssr-plus/root/etc/ssrplus/black.list << EOF
+# services.googleapis.cn
+# googleapis.cn
+# heroku.com
+# githubusercontent.com 
+# EOF
+# popd
 
 # Clone community packages to package/community
-mkdir package/community
-pushd package/community
+# mkdir package/community
+# pushd package/community
 
 #echo '网易云音乐'
 #git clone  --depth=1 https://github.com/project-openwrt/luci-app-unblockneteasemusic.git 
