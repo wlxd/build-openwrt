@@ -9,3 +9,9 @@
 # 拉取插件请看《各种命令的简单介绍》第4条、第5条说明,不管大神还是新手请认真的看看,再次强调请不要一下子就拉取别人一堆插件的插件包,容易造成编译错误的
 
 sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
+
+# 修改自带主题
+# Add luci-theme-argon
+git clone --depth=1 -b 18.06 https://github.com/jerrykuku/luci-theme-argon
+git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config.git
+rm -rf ../lean/luci-theme-argon
