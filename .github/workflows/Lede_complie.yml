@@ -268,16 +268,6 @@ jobs:
       with:
         name: OpenWrt-${{ env.NAME2 }}${{ env.NAME1 }}-firmware-${{ env.date }}
         path: ${{ env.FIRMWARE }}
-
-    - name: 上传固件到「奶牛快传」和「WeTransfer」
-      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
-      run: |
-        curl -fsSL git.io/file-transfer | sh
-        ./transfer cow --block 2621440 -s -p 64 --no-progress ${FIRMWARE} 2>&1 | tee cowtransfer.log
-        echo "::warning file=奶牛快传（${{matrix.target}}）::$(cat cowtransfer.log | grep https)"
-        curl -fsSL git.io/file-transfer | sh
-        ./transfer wet -s -p 16 --no-progress ${FIRMWARE} 2>&1 | tee wetransfer.log
-        echo "::warning file=WeTransfer（${{matrix.target}}）::$(cat wetransfer.log | grep https)"
     
     - name: 自动发布固件
       uses: softprops/action-gh-release@v1
