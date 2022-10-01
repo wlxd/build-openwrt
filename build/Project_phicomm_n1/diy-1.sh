@@ -8,42 +8,33 @@
 # 软件包地址：https://github.com/281677160/openwrt-package
 # 拉取插件请看《各种命令的简单介绍》第4条、第5条说明,不管大神还是新手请认真的看看,再次强调请不要一下子就拉取别人一堆插件的插件包,容易造成编译错误的
 
+#增加helloworld
 sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
+
 # Add packages
-svn co https://github.com/kiddin9/luci-app-dnsfilter/trunk package/luci-app-dnsfilter
-svn co https://github.com/ophub/luci-app-amlogic/trunk package/luci-app-amlogic
-
-
-# firewall custom
-echo "iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE" >> package/network/config/firewall/files/firewall.user
-
-# Add luci-app-ssr-plus
-# pushd package/lean
-# git clone --depth=1 https://github.com/fw876/helloworld
-# cat > helloworld/luci-app-ssr-plus/root/etc/ssrplus/black.list << EOF
-# services.googleapis.cn
-# googleapis.cn
-# heroku.com
-# githubusercontent.com 
-# EOF
-# popd
-
-# Clone community packages to package/community
-# mkdir package/community
-# pushd package/community
+svn co https://github.com/kiddin9/luci-app-dnsfilter/trunk package/diy/luci-app-dnsfilter
+svn co https://github.com/ophub/luci-app-amlogic/trunk package/diy/luci-app-amlogic
 
 #echo '网易云音乐'
-git clone  --depth=1 https://github.com/project-openwrt/luci-app-unblockneteasemusic.git 
+git clone  --depth=1 https://github.com/project-openwrt/luci-app-unblockneteasemusic.git  package/diy/luci-app-unblockneteasemusic
 
 # Add ServerChan
-git clone --depth=1 https://github.com/tty228/luci-app-serverchan
+git clone --depth=1 https://github.com/tty228/luci-app-serverchan package/diy/luci-app-serverchan
 
 # Add OpenClash
-# git clone --depth=1 https://github.com/vernesong/OpenClash
+# git clone --depth=1 https://github.com/vernesong/OpenClash package/diy/OpenClash
 
-# Add luci-theme-argon  主题适配
-git clone --depth=1 -b 18.06 https://github.com/jerrykuku/luci-theme-argon
-git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config.git
-rm -rf ../lean/luci-theme-argon
+# 修改自带主题，删除原主题包
+rm -rf package/lean/luci-theme-argon
+# rm -rf openwrt/package/lean/luci-theme-netgear
+
+# 添加新的主题包 # Add luci-theme-argon
+git clone --depth=1 -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
+# git clone https://github.com/sypopo/luci-theme-atmaterial.git package/lean/luci-theme-atmaterial
+# git clone https://github.com/sypopo/luci-theme-argon-mc.git package/lean/luci-theme-argon-mc
+git clone https://github.com/Leo-Jo-My/luci-theme-opentomcat.git package/lean/luci-theme-opentomcat
+git clone https://github.com/garypang13/luci-theme-edge.git package/lean/luci-theme-edge
+# argon 的设置
+git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config.git  package/diy/luci-app-argon-config
 
 
