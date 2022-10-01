@@ -33,7 +33,7 @@ echo "iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE" >> package/network/c
 # pushd package/community
 
 #echo '网易云音乐'
-#git clone  --depth=1 https://github.com/project-openwrt/luci-app-unblockneteasemusic.git 
+git clone  --depth=1 https://github.com/project-openwrt/luci-app-unblockneteasemusic.git 
 
 # Add ServerChan
 git clone --depth=1 https://github.com/tty228/luci-app-serverchan
