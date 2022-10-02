@@ -76,10 +76,9 @@ git clone https://github.com/immortalwrt-collections/openwrt-gowebdav package/di
 
   git clone https://github.com/kenzok8/small-package package/small-package
 # git clone https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic.git package/diy/luci-app-unblockneteasemusic
-
-
+# lieonl 的19.07 不用加这些主题，small-package自带啊，都有 貌似只有大雕的不行需要自己加
+# rm -rf package/lean/luci-theme-argon
 # Add luci-theme-argon 这是那个修改版
 # git clone --depth=1 -b 18.06 https://github.com/jerrykuku/luci-theme-argon # 适配的是18.06以及LEDE版本
-git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon # 主线适配的是19.07
-git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config.git
-rm -rf ../lean/luci-theme-argon
+# git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon # 主线适配的是19.07
+# git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config.git
