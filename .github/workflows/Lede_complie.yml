@@ -117,9 +117,6 @@ jobs:
         
     - name: 加载源,patch补丁和自定义设置
       run: |
-        if [ ${{matrix.target}} == "Lede_phicomm_n1" -o ${{matrix.target}} == "Project_phicomm_n1" ];then
-          svn co https://github.com/281677160/N1/trunk reform
-        fi
         cp -Rf `find ./ -maxdepth 1 -type d ! -path './openwrt' ! -path './'` openwrt
         cd openwrt
         if [ -f "build/${{matrix.target}}/$DIY_P1_SH" ]; then
