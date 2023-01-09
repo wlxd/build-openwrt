@@ -33,9 +33,11 @@ sed -i 's/192.168.1.1/192.168.3.2/g' package/base-files/files/bin/config_generat
 # find . -name 'ddns-scripts_aliyun' -o -name 'ddns-scripts_dnspod' -o -name 'luci-app-wol' | xargs -i rm -rf {}
 # find . -name 'luci-app-wrtbwmon' -o -name 'wrtbwmon' -o -name 'pdnsd-alt' | xargs -i rm -rf {}
 # find . -name 'UnblockNeteaseMusic-Go' -o -name 'UnblockNeteaseMusic' -o -name 'luci-app-unblockmusic' | xargs -i rm -rf {}
-pushd package/small-package/luci-app-ssr-plus
-git reset --hard 7842f18c33019ec281083ff3f88294fbe5a89bda 
-popd
+
+# 这个是xray 1.6.4 锁死版
+# pushd package/small-package/luci-app-ssr-plus
+# git reset --hard 7842f18c33019ec281083ff3f88294fbe5a89bda 
+# popd
 
 # 更换golang版本，因为19.07自带golang无法编译xray的新版本
 pushd feeds/packages/lang
