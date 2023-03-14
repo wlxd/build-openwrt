@@ -1,4 +1,5 @@
 **重要提醒：**
+03102023
 
 目前SSRplus不支持reality的实现，并且xray开发者给出了VLESS-XTLS-uTLS-REALITY的提醒和建议，内容有[**此大佬**](https://github.com/chika0801/Xray-examples) 收集和总结,这里投喂给chatgpt总结如下，至于是否升级你的部署**请自行斟酌**
 
