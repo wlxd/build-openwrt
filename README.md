@@ -1,5 +1,5 @@
 重要提醒：
-目前SSRplus不支持reality的实现，并且xray开发者给出了xtls-vision reality的提醒和建议，内容有[**此大佬**](https://github.com/chika0801/Xray-examples) 收集和总结,这里头尾给chatgpt总结如下：
+目前SSRplus不支持reality的实现，并且xray开发者给出了xtls-vision reality的提醒和建议，内容有[**此大佬**](https://github.com/chika0801/Xray-examples) 收集和总结,这里投喂给chatgpt总结如下：
 
 > 以下是XTLS Vision的使用说明和注意事项的主要点：
 > 1. 目前几乎没有收到配置正确的XTLS Vision被封端口的报告，但也要确保服务端使用合理的端口，禁回国流量，只配置XTLS Vision，不兼容普通TLS代理，回落到网页，不回落/分流到其它代理协议，客户端启用uTLS（fingerprint）。
