@@ -35,14 +35,14 @@ sed -i 's/192.168.1.1/192.168.3.2/g' package/base-files/files/bin/config_generat
 # find . -name 'UnblockNeteaseMusic-Go' -o -name 'UnblockNeteaseMusic' -o -name 'luci-app-unblockmusic' | xargs -i rm -rf {}
 
 # 这个是xray 1.6.4 锁死版
-# pushd package/small-package/luci-app-ssr-plus
-# git reset --hard 7842f18c33019ec281083ff3f88294fbe5a89bda 
-# popd
+pushd package/small-package/luci-app-ssr-plus
+git reset --hard 7842f18c33019ec281083ff3f88294fbe5a89bda 
+popd
 
 # 更换golang版本，因为19.07自带golang无法编译xray的新版本；发现同一个配置编译出来体积一样但是这个慢了30分钟，所以保留这种此种替换写法
-pushd feeds/packages/lang
-rm -fr golang && svn co https://github.com/openwrt/packages/trunk/lang/golang
-popd
+# pushd feeds/packages/lang
+# rm -fr golang && svn co https://github.com/openwrt/packages/trunk/lang/golang
+# popd
 
 # 修改插件名字（修改名字后不知道会不会对插件功能有影响，自己多测试）
 sed -i 's/"aMule设置"/"电驴下载"/g' `grep "aMule设置" -rl ./`
