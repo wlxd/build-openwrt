@@ -9,6 +9,8 @@
 # 拉取插件请看《各种命令的简单介绍》第4条、第5条说明,不管大神还是新手请认真的看看,再次强调请不要一下子就拉取别人一堆插件的插件包,容易造成编译错误的
 # 增加出国源
 # sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
+# 切换增加源的方式
+  sed -i '$a src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
 # 你可能需要删除lienol的插件
 # Uncomment a feed source，如果用lede的源码只用加上这一句就可以看见ssr插件了！不用再次添加源的
 # sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
@@ -74,7 +76,7 @@ git clone https://github.com/immortalwrt-collections/openwrt-gowebdav package/di
 # sed -i '$a src-git nas https://github.com/linkease/nas-packages.git;master' feeds.conf.default
 # sed -i '$a src-git nas_luci https://github.com/linkease/nas-packages-luci.git;main' feeds.conf.default
 
-  git clone https://github.com/kenzok8/small-package package/small-package
+#  git clone https://github.com/kenzok8/small-package package/small-package
 # git clone https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic.git package/diy/luci-app-unblockneteasemusic
 # lieonl 的19.07 不用加这些主题，small-package自带啊，都有 貌似只有大雕的不行需要自己加
 # rm -rf package/lean/luci-theme-argon
