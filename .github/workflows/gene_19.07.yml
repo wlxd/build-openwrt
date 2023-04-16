@@ -112,12 +112,12 @@ jobs:
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         cd openwrt
-        if [ ${{matrix.target}} != openwrt ]; then
-         rm -rf package/lienol/luci-app-timecontrol
-         rm -rf package/ntlf9t/{smartdns,luci-app-smartdns}
-         rm -rf package/emortal/{luci-app-argon-config,luci-theme-argonv3}
-         rm -rf package/lean/{luci-app-netdata,luci-theme-argon,k3screenctrl}
-        fi
+        # if [ ${{matrix.target}} != openwrt ]; then
+        #  rm -rf package/lienol/luci-app-timecontrol
+        #  rm -rf package/ntlf9t/{smartdns,luci-app-smartdns}
+        # rm -rf package/emortal/{luci-app-argon-config,luci-theme-argonv3}
+        #  rm -rf package/lean/{luci-app-netdata,luci-theme-argon,k3screenctrl}
+        # fi
         # ./scripts/feeds update -a
         # ./scripts/feeds install -a
          
@@ -168,6 +168,7 @@ jobs:
          cp -Rf build/${{matrix.target}}/package/* ./ && rm -rf build/${{matrix.target}}/package
         fi
         [ -e build/${{matrix.target}}/$CONFIG_FILE ]
+        ./scripts/feeds update -a && ./scripts/feeds install -a
         mv build/${{matrix.target}}/$CONFIG_FILE .config
         if [ $REPO_URL == "https://github.com/coolsnowwolf/lede" ]; then
          echo "NAME2=Lede-" >> $GITHUB_ENV
