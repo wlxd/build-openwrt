@@ -139,7 +139,7 @@ jobs:
            # cp -Rf package/* './openwrt' && rm -rf './openwrt/package'
         # fi
           # ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a 
-            ./scripts/feeds update -a && ./scripts/feeds install -a
+          #  ./scripts/feeds update -a && ./scripts/feeds install -a
         # if [ ${{matrix.target}} == Lienol_x86_64 ]; then
             # rm -rf package/litte/adguardhome && rm -rf package/litte/luci-app-adguardhome
             # cp -f package/litte/commit/zzz-default-settings package/default-settings/files/zzz-default-settings
