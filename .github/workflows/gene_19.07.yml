@@ -167,8 +167,8 @@ jobs:
          cp -Rf build/${{matrix.target}}/diy/* ./
          cp -Rf build/${{matrix.target}}/package/* ./ && rm -rf build/${{matrix.target}}/package
         fi
-        [ -e build/${{matrix.target}}/$CONFIG_FILE ]
         ./scripts/feeds update -a && ./scripts/feeds install -a
+        [ -e build/${{matrix.target}}/$CONFIG_FILE ]
         mv build/${{matrix.target}}/$CONFIG_FILE .config
         if [ $REPO_URL == "https://github.com/coolsnowwolf/lede" ]; then
          echo "NAME2=Lede-" >> $GITHUB_ENV
