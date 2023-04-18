@@ -125,7 +125,7 @@ jobs:
         #if [ ${{matrix.target}} != "openwrt" ]; then
           #git clone -b $REPO_BRANCH --single-branch https://github.com/281677160/openwrt-package package/danshui
         #fi
-        ./scripts/feeds update -a && ./scripts/feeds install -a
+        # ./scripts/feeds update -a && ./scripts/feeds install -a
         if [ -f "build/${{matrix.target}}/$DIY_P2_SH" ]; then
           chmod +x build/${{matrix.target}}/$DIY_P2_SH
           /bin/bash "build/${{matrix.target}}/$DIY_P2_SH"
@@ -140,6 +140,7 @@ jobs:
         if [ -n "$(ls -A "build/${{matrix.target}}/diy" 2>/dev/null)" ]; then
          cp -Rf build/${{matrix.target}}/diy/* ./
         fi
+        ./scripts/feeds update -a && ./scripts/feeds install -a
         [ -e build/${{matrix.target}}/$CONFIG_FILE ]
         mv build/${{matrix.target}}/$CONFIG_FILE .config
         if [ $REPO_URL == "https://github.com/coolsnowwolf/lede" ]; then
