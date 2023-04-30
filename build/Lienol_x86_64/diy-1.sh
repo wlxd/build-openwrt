@@ -10,7 +10,7 @@
 # 增加出国源
 # sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
 # 切换增加源的方式
-  sed -i '$a src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
+# sed -i '$a src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
 # 你可能需要删除lienol的插件
 # Uncomment a feed source，如果用lede的源码只用加上这一句就可以看见ssr插件了！不用再次添加源的
 # sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
