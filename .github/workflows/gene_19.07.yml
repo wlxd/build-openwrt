@@ -137,7 +137,7 @@ jobs:
           # git clone -b 19.07 --single-branch https://github.com/281677160/openwrt-package package/danshui
            # cp -Rf package/* './openwrt' && rm -rf './openwrt/package'
         # fi
-          # ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a 
+        ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a 
           #  ./scripts/feeds update -a && ./scripts/feeds install -a
         # if [ ${{matrix.target}} == Lienol_x86_64 ]; then
             # rm -rf package/litte/adguardhome && rm -rf package/litte/luci-app-adguardhome
@@ -166,7 +166,7 @@ jobs:
          cp -Rf build/${{matrix.target}}/diy/* ./
          cp -Rf build/${{matrix.target}}/package/* ./ && rm -rf build/${{matrix.target}}/package
         fi
-        ./scripts/feeds update -a && ./scripts/feeds install -a
+        # ./scripts/feeds update -a && ./scripts/feeds install -a
         [ -e build/${{matrix.target}}/$CONFIG_FILE ]
         mv build/${{matrix.target}}/$CONFIG_FILE .config
         if [ $REPO_URL == "https://github.com/coolsnowwolf/lede" ]; then
