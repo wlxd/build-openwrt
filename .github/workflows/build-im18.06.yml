@@ -129,7 +129,7 @@ jobs:
           /bin/bash "build/${{matrix.target}}/$DIY_P1_SH"
         fi
         if [ ${{matrix.target}} != "openwrt" ]; then
-          # git clone -b immortalwrt --single-branch https://github.com/281677160/openwrt-package package/danshui
+          git clone -b immortalwrt --single-branch https://github.com/281677160/openwrt-package package/danshui
         fi
         if [[ "${REPO_BRANCH}" == "openwrt-18.06" ]]; then
          # echo "ZZZ=package/emortal/default-settings/files" >> $GITHUB_ENV
