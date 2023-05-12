@@ -10,7 +10,7 @@
 # 增加出国源
 # sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
 # 切换增加源的方式
-# sed -i '$a src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
+sed -i '$a src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
 # 你可能需要删除lienol的插件
 # Uncomment a feed source，如果用lede的源码只用加上这一句就可以看见ssr插件了！不用再次添加源的
 # sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
@@ -86,14 +86,14 @@ git clone https://github.com/immortalwrt-collections/openwrt-gowebdav package/di
 # git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon # 主线适配的是19.07
 # git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config.git
 
-git clone https://github.com/kenzok8/small-package package/small-package
+# git clone https://github.com/kenzok8/small-package package/small-package
 
 # 来自 kenzok8/openwrt_Build
-rm -rf feeds/luci/themes/luci-theme-argon && rm -rf feeds/other/luci-app-adguardhome && rm -rf feeds/packages/net/adguardhome
-rm -rf feeds/lienol/luci-app-fileassistant && rm -rf feeds/other/luci-app-dockerman && rm -rf feeds/packages/net/smartdns
-cp -f feeds/smpackage/.github/diy/zzz-default-settings package/default-settings/files/zzz-default-settings
-cp -f feeds/smpackage/.github/diy/banner package/base-files/files/etc/banner && rm -rf feeds/smpackage/upx
-rm -rf feeds/smpackage/luci-theme-design && git clone -b js --single-branch https://github.com/gngpp/luci-theme-design feeds/smpackage/luci-theme-design
+# rm -rf feeds/luci/themes/luci-theme-argon && rm -rf feeds/other/luci-app-adguardhome && rm -rf feeds/packages/net/adguardhome
+# rm -rf feeds/lienol/luci-app-fileassistant && rm -rf feeds/other/luci-app-dockerman && rm -rf feeds/packages/net/smartdns
+# cp -f feeds/smpackage/.github/diy/zzz-default-settings package/default-settings/files/zzz-default-settings
+# cp -f feeds/smpackage/.github/diy/banner package/base-files/files/etc/banner && rm -rf feeds/smpackage/upx
+# rm -rf feeds/smpackage/luci-theme-design && git clone -b js --single-branch https://github.com/gngpp/luci-theme-design feeds/smpackage/luci-theme-design
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
-sed -i "s/%D %V, %C/openwrt $(date +'%m.%d') by kenzo/g" package/base-files/files/etc/banner
+# sed -i "s/%D %V, %C/openwrt $(date +'%m.%d') by kenzo/g" package/base-files/files/etc/banner
 
