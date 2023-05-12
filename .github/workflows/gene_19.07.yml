@@ -93,8 +93,9 @@ jobs:
       run: |
         sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
         sudo -E apt-get -qq update -y
+        # sudo -E apt-get -qq install -y build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 python2.7 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs g++-multilib gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler git-core antlr3 gperf wget curl swig rsync ccache xsltproc rename
         sudo -E apt-get -qq install -y $(curl -fsSL git.io/depends-ubuntu-2004)
-        sudo -E apt-get -qq install -y upx-ucl ccache xsltproc rename
+        sudo -E apt-get -qq install -y autoconf-archive ccache xsltproc rename openssl
         sudo -E apt-get -qq autoremove -y --purge
         sudo -E apt-get -qq clean -y
         sudo timedatectl set-timezone "$TZ"
@@ -111,12 +112,12 @@ jobs:
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         cd openwrt
-        # if [ ${{matrix.target}} != openwrt ]; then
-        #  rm -rf package/lienol/luci-app-timecontrol
-        #  rm -rf package/ntlf9t/{smartdns,luci-app-smartdns}
-        # rm -rf package/emortal/{luci-app-argon-config,luci-theme-argonv3}
-        #  rm -rf package/lean/{luci-app-netdata,luci-theme-argon,k3screenctrl}
-        # fi
+        if [ ${{matrix.target}} != openwrt ]; then
+         rm -rf package/lienol/luci-app-timecontrol
+         rm -rf package/ntlf9t/{smartdns,luci-app-smartdns}
+         rm -rf package/emortal/{luci-app-argon-config,luci-theme-argonv3}
+         rm -rf package/lean/{luci-app-netdata,luci-theme-argon,k3screenctrl}
+        fi
         # ./scripts/feeds update -a
         # ./scripts/feeds install -a
          
@@ -137,7 +138,8 @@ jobs:
           # git clone -b 19.07 --single-branch https://github.com/281677160/openwrt-package package/danshui
            # cp -Rf package/* './openwrt' && rm -rf './openwrt/package'
         # fi
-        ./scripts/feeds update -a && ./scripts/feeds install -a
+          # ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a 
+            ./scripts/feeds update -a && ./scripts/feeds install -a
         # if [ ${{matrix.target}} == Lienol_x86_64 ]; then
             # rm -rf package/litte/adguardhome && rm -rf package/litte/luci-app-adguardhome
             # cp -f package/litte/commit/zzz-default-settings package/default-settings/files/zzz-default-settings
@@ -165,7 +167,6 @@ jobs:
          cp -Rf build/${{matrix.target}}/diy/* ./
          cp -Rf build/${{matrix.target}}/package/* ./ && rm -rf build/${{matrix.target}}/package
         fi
-        # ./scripts/feeds update -a && ./scripts/feeds install -a
         [ -e build/${{matrix.target}}/$CONFIG_FILE ]
         mv build/${{matrix.target}}/$CONFIG_FILE .config
         if [ $REPO_URL == "https://github.com/coolsnowwolf/lede" ]; then
