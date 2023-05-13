@@ -86,7 +86,7 @@ git clone https://github.com/immortalwrt-collections/openwrt-gowebdav package/di
 # git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon # 主线适配的是19.07
 # git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config.git
 
-git clone https://github.com/kenzok8/small-package package/small-package
+# git clone https://github.com/kenzok8/small-package package/small-package
 
 # 来自 kenzok8/openwrt_Build
 # rm -rf feeds/luci/themes/luci-theme-argon && rm -rf feeds/other/luci-app-adguardhome && rm -rf feeds/packages/net/adguardhome
