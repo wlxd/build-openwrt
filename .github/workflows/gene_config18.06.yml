@@ -129,10 +129,10 @@ jobs:
           chmod +x build/${{matrix.target}}/$DIY_P1_SH
           /bin/bash "build/${{matrix.target}}/$DIY_P1_SH"
         fi
-        # if [ ${{matrix.target}} != "openwrt" ]; then
-         # git clone -b openwrt-18.06 --single-branch  https://github.com/immortalwrt/packages/ package/danshui
+        if [ ${{matrix.target}} != "openwrt" ]; then
           git clone -b immortalwrt --single-branch https://github.com/281677160/openwrt-package package/danshui
-        # fi
+          cp -Rf package/* './openwrt' && rm -rf './openwrt/package'
+        fi
         if [[ "${REPO_BRANCH}" == "openwrt-18.06" ]]; then
           echo "ZZZ=package/emortal/default-settings/files" >> $GITHUB_ENV
           echo "CODE=Mortal" >> $GITHUB_ENV
