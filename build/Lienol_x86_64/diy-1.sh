@@ -104,6 +104,8 @@ done
 # git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config.git
 # 这个大佬应该是把ssr和passwall的依赖分开了，导致编译失败，加上看看吧
 # git clone https://github.com/kenzok8/small-package package/small-package
-sed -i '$a src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
-sed -i '$a src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
+git clone https://github.com/kenzok8/openwrt-packages package/k8diya
+git clone https://github.com/kenzok8/small package/k9diyb
+# sed -i '$a src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
+# sed -i '$a src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
 # sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
