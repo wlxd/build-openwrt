@@ -104,6 +104,8 @@ done
 # git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config.git
 # 这个大佬应该是把ssr和passwall的依赖分开了，导致编译失败，加上看看吧
 # git clone https://github.com/kenzok8/small-package package/small-package
+# 可能与yml文件内的编译命令有关系，用 sed 语句拉下来的包不生效，一直无法拉取最新的xray，所以这里同为改为git clone 命令，可以拉到最新的了
+# 这里的逻辑应该是在最开始就让它加载在feeds conf的默认里面，不折腾了
 git clone https://github.com/kenzok8/openwrt-packages package/k8diya
 git clone https://github.com/kenzok8/small package/k8diyb
 # sed -i '$a src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
