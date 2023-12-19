@@ -40,9 +40,9 @@ sed -i 's/192.168.1.1/192.168.3.2/g' package/base-files/files/bin/config_generat
 # popd
 
 # 更换golang版本，因为19.07自带golang无法编译xray的新版本；发现同一个配置编译出来体积一样但是这个慢了30分钟，所以保留这种此种替换写法
-# pushd feeds/packages/lang
-# rm -fr golang && svn co https://github.com/openwrt/packages/trunk/lang/golang
-# popd
+pushd feeds/packages/lang
+rm -fr golang && svn co https://github.com/openwrt/packages/trunk/lang/golang
+popd
 
 # 来自 kenzok8/openwrt_Build
 rm -rf feeds/luci/themes/luci-theme-argon && rm -rf feeds/other/luci-app-adguardhome && rm -rf feeds/packages/net/adguardhome
