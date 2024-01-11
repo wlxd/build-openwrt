@@ -90,6 +90,33 @@ git clone https://github.com/immortalwrt-collections/openwrt-gowebdav package/di
 # git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config.git
 # 这个大佬应该是把ssr和passwall的依赖分开了，导致编译失败，加上看看吧
 # git clone https://github.com/kenzok8/small-package package/small-package
+
+
+# 更换golang版本，因为19.07自带golang无法编译xray的新版本；发现同一个配置编译出来体积一样但是这个慢了30分钟，所以保留这种此种替换写法
+pushd feeds/packages/lang
+rm -fr golang && svn co https://github.com/openwrt/packages/trunk/lang/golang
+popd
+
+# 新增可能冲突插件
+# rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
+
+
+list="\
+  autosamba                ddns-scripts_aliyun             ddns-scripts-cloudflare ddns-scripts_dnspod \
+  luci-app-accesscontrol   luci-app-adbyby-plus            luci-app-arpbind        luci-app-autoreboot \
+  luci-app-control-timewol luci-app-control-webrestriction luci-app-control-weburl luci-app-cpufreq \
+  luci-app-ddns            luci-app-filetransfer           luci-app-ipsec-vpnd     luci-app-nlbwmon \
+  luci-app-ramfree         luci-app-ssr-plus               luci-app-timecontrol    luci-app-turboacc \
+  luci-app-unblockmusic    luci-app-unblockmusic           luci-app-upnp           luci-app-vlmcsd \
+  luci-app-vsftpd          luci-app-wol                    luci-app-zerotier \
+"
+for i in $list; do
+  sed -i "/DEFAULT_PACKAGES:=/,/^\s*$/s/$i//" include/target.mk
+  sed -i "/DEFAULT_PACKAGES/,//s/$i//" target/linux/ramips/Makefile
+done
+
+
+
 # 可能与yml文件内的编译命令有关系，用 sed 语句拉下来的包不生效，一直无法拉取最新的xray，所以这里同为改为git clone 命令，可以拉到最新的了
 # 这里的逻辑应该是在最开始就让它加载在feeds conf的默认里面，不折腾了~~~~ 新编译的会自动崩溃！
 git clone https://github.com/kenzok8/openwrt-packages package/kenzo
@@ -98,3 +125,5 @@ git clone https://github.com/kenzok8/small package/small
 ## sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
 
 # sed -i '$a src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
+
+
