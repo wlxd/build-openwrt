@@ -39,28 +39,6 @@ sed -i 's/192.168.1.1/192.168.3.2/g' package/base-files/files/bin/config_generat
 # git reset --hard 7842f18c33019ec281083ff3f88294fbe5a89bda 
 # popd
 
-# 更换golang版本，因为19.07自带golang无法编译xray的新版本；发现同一个配置编译出来体积一样但是这个慢了30分钟，所以保留这种此种替换写法
-pushd feeds/packages/lang
-rm -fr golang && svn co https://github.com/openwrt/packages/trunk/lang/golang
-popd
-
-# 新增可能冲突插件
-rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
-
-
-list="\
-  autosamba                ddns-scripts_aliyun             ddns-scripts-cloudflare ddns-scripts_dnspod \
-  luci-app-accesscontrol   luci-app-adbyby-plus            luci-app-arpbind        luci-app-autoreboot \
-  luci-app-control-timewol luci-app-control-webrestriction luci-app-control-weburl luci-app-cpufreq \
-  luci-app-ddns            luci-app-filetransfer           luci-app-ipsec-vpnd     luci-app-nlbwmon \
-  luci-app-ramfree         luci-app-ssr-plus               luci-app-timecontrol    luci-app-turboacc \
-  luci-app-unblockmusic    luci-app-unblockmusic           luci-app-upnp           luci-app-vlmcsd \
-  luci-app-vsftpd          luci-app-wol                    luci-app-zerotier \
-"
-for i in $list; do
-  sed -i "/DEFAULT_PACKAGES:=/,/^\s*$/s/$i//" include/target.mk
-  sed -i "/DEFAULT_PACKAGES/,//s/$i//" target/linux/ramips/Makefile
-done
 
 
 # 来自 kenzok8/openwrt_Build
