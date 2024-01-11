@@ -47,6 +47,22 @@ popd
 # 新增可能冲突插件
 rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
 
+
+list="\
+  autosamba                ddns-scripts_aliyun             ddns-scripts-cloudflare ddns-scripts_dnspod \
+  luci-app-accesscontrol   luci-app-adbyby-plus            luci-app-arpbind        luci-app-autoreboot \
+  luci-app-control-timewol luci-app-control-webrestriction luci-app-control-weburl luci-app-cpufreq \
+  luci-app-ddns            luci-app-filetransfer           luci-app-ipsec-vpnd     luci-app-nlbwmon \
+  luci-app-ramfree         luci-app-ssr-plus               luci-app-timecontrol    luci-app-turboacc \
+  luci-app-unblockmusic    luci-app-unblockmusic           luci-app-upnp           luci-app-vlmcsd \
+  luci-app-vsftpd          luci-app-wol                    luci-app-zerotier \
+"
+for i in $list; do
+  sed -i "/DEFAULT_PACKAGES:=/,/^\s*$/s/$i//" include/target.mk
+  sed -i "/DEFAULT_PACKAGES/,//s/$i//" target/linux/ramips/Makefile
+done
+
+
 # 来自 kenzok8/openwrt_Build
 rm -rf feeds/luci/themes/luci-theme-argon && rm -rf feeds/other/luci-app-adguardhome && rm -rf feeds/packages/net/adguardhome
 rm -rf feeds/lienol/luci-app-fileassistant && rm -rf feeds/other/luci-app-dockerman && rm -rf feeds/packages/net/smartdns
