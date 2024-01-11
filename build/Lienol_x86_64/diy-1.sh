@@ -97,10 +97,6 @@ pushd feeds/packages/lang
 rm -fr golang && svn co https://github.com/openwrt/packages/trunk/lang/golang
 popd
 
-# 新增可能冲突插件
-# rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
-
-
 list="\
   autosamba                ddns-scripts_aliyun             ddns-scripts-cloudflare ddns-scripts_dnspod \
   luci-app-accesscontrol   luci-app-adbyby-plus            luci-app-arpbind        luci-app-autoreboot \
@@ -121,6 +117,8 @@ done
 # 这里的逻辑应该是在最开始就让它加载在feeds conf的默认里面，不折腾了~~~~ 新编译的会自动崩溃！
 git clone https://github.com/kenzok8/openwrt-packages package/kenzo
 git clone https://github.com/kenzok8/small package/small
+
+
 ## sed -i '$a src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
 ## sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
 
