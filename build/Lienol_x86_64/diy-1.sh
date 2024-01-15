@@ -91,20 +91,6 @@ git clone https://github.com/immortalwrt-collections/openwrt-gowebdav package/di
 # 这个大佬应该是把ssr和passwall的依赖分开了，导致编译失败，加上看看吧
 # git clone https://github.com/kenzok8/small-package package/small-package
 
-list="\
-  autosamba                ddns-scripts_aliyun             ddns-scripts-cloudflare ddns-scripts_dnspod \
-  luci-app-accesscontrol   luci-app-adbyby-plus            luci-app-arpbind        luci-app-autoreboot \
-  luci-app-control-timewol luci-app-control-webrestriction luci-app-control-weburl luci-app-cpufreq \
-  luci-app-ddns            luci-app-filetransfer           luci-app-ipsec-vpnd     luci-app-nlbwmon \
-  luci-app-ramfree         luci-app-ssr-plus               luci-app-timecontrol    luci-app-turboacc \
-  luci-app-unblockmusic    luci-app-unblockmusic           luci-app-upnp           luci-app-vlmcsd \
-  luci-app-vsftpd          luci-app-wol                    luci-app-zerotier \
-"
-for i in $list; do
-  sed -i "/DEFAULT_PACKAGES:=/,/^\s*$/s/$i//" include/target.mk
-  sed -i "/DEFAULT_PACKAGES/,//s/$i//" target/linux/ramips/Makefile
-done
-
 
 
 # 可能与yml文件内的编译命令有关系，用 sed 语句拉下来的包不生效，一直无法拉取最新的xray，所以这里同为改为git clone 命令，可以拉到最新的了
