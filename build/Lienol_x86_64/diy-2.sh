@@ -35,9 +35,9 @@ sed -i 's/192.168.1.1/192.168.3.2/g' package/base-files/files/bin/config_generat
 # find . -name 'UnblockNeteaseMusic-Go' -o -name 'UnblockNeteaseMusic' -o -name 'luci-app-unblockmusic' | xargs -i rm -rf {}
 
 # 这个是xray 1.6.4 锁死版
-# pushd package/small-package/luci-app-ssr-plus
-# git reset --hard 7842f18c33019ec281083ff3f88294fbe5a89bda 
-# popd
+pushd package/small/xray-core
+git reset --hard 30a37b9ea4586a5b3f950f88b94cf5df610b0b03
+popd
 
 # 更换golang版本，因为19.07自带golang无法编译xray的新版本；发现同一个配置编译出来体积一样但是这个慢了30分钟，所以保留这种此种替换写法
 # pushd feeds/packages/lang
