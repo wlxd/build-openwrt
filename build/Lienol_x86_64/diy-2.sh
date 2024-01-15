@@ -40,9 +40,9 @@ sed -i 's/192.168.1.1/192.168.3.2/g' package/base-files/files/bin/config_generat
 # popd
 
 # 更换golang版本，因为19.07自带golang无法编译xray的新版本；发现同一个配置编译出来体积一样但是这个慢了30分钟，所以保留这种此种替换写法
-pushd feeds/packages/lang
-rm -fr golang && svn co https://github.com/openwrt/packages/trunk/lang/golang
-popd
+# pushd feeds/packages/lang
+# rm -fr golang && svn co https://github.com/openwrt/packages/trunk/lang/golang
+# popd
 
 # 新增可能冲突插件
 # rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
