@@ -34,15 +34,15 @@ sed -i 's/192.168.1.1/192.168.3.2/g' package/base-files/files/bin/config_generat
 # find . -name 'luci-app-wrtbwmon' -o -name 'wrtbwmon' -o -name 'pdnsd-alt' | xargs -i rm -rf {}
 # find . -name 'UnblockNeteaseMusic-Go' -o -name 'UnblockNeteaseMusic' -o -name 'luci-app-unblockmusic' | xargs -i rm -rf {}
 
-# 这个是xray 1.6.4 锁死版
+# 这个是xray 1.6.4 锁死版, 这个替换是没有问题的
 pushd package/small/xray-core
 git reset --hard 30a37b9ea4586a5b3f950f88b94cf5df610b0b03
 popd
 
 # 更换golang版本，因为19.07自带golang无法编译xray的新版本；发现同一个配置编译出来体积一样但是这个慢了30分钟，所以保留这种此种替换写法
-# pushd feeds/packages/lang
-# rm -fr golang && svn co https://github.com/openwrt/packages/trunk/lang/golang
-# popd
+pushd feeds/packages/lang
+rm -fr golang && svn co https://github.com/openwrt/packages/trunk/lang/golang
+popd
 
 # 新增可能冲突插件
 # rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
