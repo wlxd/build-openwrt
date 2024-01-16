@@ -93,9 +93,9 @@ git clone https://github.com/immortalwrt-collections/openwrt-gowebdav package/di
 
 
 # 更换golang版本，因为19.07自带golang无法编译xray的新版本；发现同一个配置编译出来体积一样但是这个慢了30分钟，所以保留这种此种替换写法
-pushd feeds/packages/lang
-rm -fr golang && svn co https://github.com/openwrt/packages/trunk/lang/golang
-popd
+# pushd feeds/packages/lang
+# rm -fr golang && svn co https://github.com/openwrt/packages/trunk/lang/golang
+# popd
 
 list="\
   autosamba                ddns-scripts_aliyun             ddns-scripts-cloudflare ddns-scripts_dnspod \
