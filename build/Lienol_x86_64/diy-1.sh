@@ -103,5 +103,5 @@ git clone https://github.com/kenzok8/small package/small
 ## sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
 
 # sed -i '$a src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
-
+sed -i '$a src-git-full luci_app_xray https://github.com/yichya/luci-app-xray' feeds.conf.default
 
