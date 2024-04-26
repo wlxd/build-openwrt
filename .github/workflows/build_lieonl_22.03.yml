@@ -59,7 +59,7 @@ jobs:
 
     steps:
     - name: 准备结束
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     
     - name: 检测脚本设置
       run: |
@@ -258,7 +258,7 @@ jobs:
         path: ./config
 
     - name: 上传固件在github空间
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: steps.organizer.outputs.status == 'success' && env.UPLOAD_FIRMWARE == 'true'
       with:
         name: OpenWrt-${{ env.NAME2 }}${{ env.NAME1 }}-firmware-${{ env.date }}
