@@ -125,10 +125,10 @@ jobs:
       run: |
         cp -Rf `find ./ -maxdepth 1 -type d ! -path './openwrt' ! -path './'` openwrt
         cd openwrt
-        # if [ -f "build/${{matrix.target}}/$DIY_P3_SH" ]; then
-          # chmod +x build/${{matrix.target}}/$DIY_P3_SH
-          # /bin/bash "build/${{matrix.target}}/$DIY_P3_SH"
-        # fi
+        if [ -f "build/${{matrix.target}}/$DIY_P3_SH" ]; then
+          chmod +x build/${{matrix.target}}/$DIY_P3_SH
+          /bin/bash "build/${{matrix.target}}/$DIY_P3_SH"
+        fi
         if [ -f "build/${{matrix.target}}/$DIY_P1_SH" ]; then
           chmod +x build/${{matrix.target}}/$DIY_P1_SH
           /bin/bash "build/${{matrix.target}}/$DIY_P1_SH"
