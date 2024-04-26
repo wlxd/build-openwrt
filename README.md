@@ -1,4 +1,6 @@
-22.03的tubroacc：[看这里](https://github.com/chenmozhijin/turboacc/blob/luci/README.md#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95)
+22.03的tubroacc：
+[看这里1](https://github.com/chenmozhijin/turboacc/blob/luci/README.md#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95)
+[看这里2](https://github.com/chenmozhijin/turboacc/issues/6)
 
 一直以来主力用的都是lienol的固件，虽然最开始跑的是天灵（immort）的固件，毕竟相对好编译，后来折腾好了lienol的固件之后，发现他的固件反应速度快了很多，当时反复在两个固件测试相同的节点和配置多次都是如此，
 此后就主力lienol的固件了。但是随着固件的升级和迭代，16M的小设备眼看就要塞满了，天灵的固件不知从何时开始已经把默认不需要插件都取消了，但是lienol的依旧存在，于是找了网上的方法，删除了默认编译的插件，那些些不常用并且消耗体积的插件就开始碍眼了；终于找到了[这个](https://github.com/coolsnowwolf/lede/issues/8671)和[这里的方法](https://github.com/kltk/openwrt-builder/blob/main/profiles/acrh17-lienol-2102/diy-part1.sh)彻底删除了默认编译的不需要的插件，估计不会再折腾了。
