@@ -59,6 +59,9 @@ rm -rf feeds/smpackage/luci-theme-design && git clone -b js --single-branch http
 # sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 # sed -i "s/%D %V, %C/openwrt $(date +'%m.%d') by kenzo/g" package/base-files/files/etc/banner
 
+# 23.x 版本的坑
+sed -i 's/ +libopenssl-legacy//g' package/small/shadowsocksr-libev/Makefile
+
 # 修改插件名字（修改名字后不知道会不会对插件功能有影响，自己多测试）
 sed -i 's/"aMule设置"/"电驴下载"/g' `grep "aMule设置" -rl ./`
 sed -i 's/"网络存储"/"NAS"/g' `grep "网络存储" -rl ./`
