@@ -48,11 +48,11 @@ rm -rf feeds/packages/lang/golang
 git clone https://github.com/sbwml/packages_lang_golang -b 21.x feeds/packages/lang/golang
 
 
-# 尝试压缩xray
+# 尝试压缩xray 没有用
 # sed -i 's/PKG_BUILD_DEPENDS:=\(.*\)/PKG_BUILD_DEPENDS:=\1 upx\/host/' package/small/xray-core/Makefile
 # sed -i -e "/$(INSTALL_BIN) \$(PKG_INSTALL_DIR)\/usr\/bin\/main \$(1)\/usr\/bin\/xray/i\\t\$(STAGING_DIR_HOST)\/bin\/upx --lzma --best \$(PKG_INSTALL_DIR)\/usr\/bin\/main" package/small/xray-core/Makefile
 # 最原始命令 sed -i -e "/\/usr\/bin\/xray/a  \\\t$\(STAGING_DIR_HOST\)\/bin\/upx --lzma --best $\(1\)\/usr\/bin\/xray" package/small/xray-core/Makefile
-sed -i -e "/\/usr\/bin\/xray/a  \\\t$\(STAGING_DIR_HOST\)\/bin\/upx --lzma --best --overlay=strip $\(1\)\/usr\/bin\/xray" package/small/xray-core/Makefile
+# sed -i -e "/\/usr\/bin\/xray/a  \\\t$\(STAGING_DIR_HOST\)\/bin\/upx --lzma --best --overlay=strip $\(1\)\/usr\/bin\/xray" package/small/xray-core/Makefile
 
 # 新增可能冲突插件
 # rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
