@@ -47,6 +47,10 @@ popd
 rm -rf feeds/packages/lang/golang
 git clone https://github.com/sbwml/packages_lang_golang -b 21.x feeds/packages/lang/golang
 
+
+# 尝试压缩xray
+sed -i -e "/\/usr\/bin\/xray/a  \\\t$\(STAGING_DIR_HOST\)\/bin\/upx --lzma --best $\(1\)\/usr\/bin\/xray" package/small/xray-core/Makefile
+
 # 新增可能冲突插件
 # rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
 
