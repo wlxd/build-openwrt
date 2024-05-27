@@ -63,7 +63,7 @@ rm -rf feeds/smpackage/luci-theme-design && git clone -b js --single-branch http
 sed -i 's/ +libopenssl-legacy//g' package/small/shadowsocksr-libev/Makefile
 
 # 尝试压缩xray
-sed -i -e "/\/usr\/bin\/xray/a  \\\t$\(STAGING_DIR_HOST\)\/bin\/upx --lzma --best $\(1\)\/usr\/bin\/xray" package/small/xray-core/Makefile
+# sed -i -e "/\/usr\/bin\/xray/a  \\\t$\(STAGING_DIR_HOST\)\/bin\/upx --lzma --best $\(1\)\/usr\/bin\/xray" package/small/xray-core/Makefile
 
 # 修改插件名字（修改名字后不知道会不会对插件功能有影响，自己多测试）
 sed -i 's/"aMule设置"/"电驴下载"/g' `grep "aMule设置" -rl ./`
