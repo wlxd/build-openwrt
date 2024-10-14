@@ -205,7 +205,7 @@ jobs:
          [ -s NAME1 ] && echo "NAME1=$(cat NAME1)" >> $GITHUB_ENV
         fi
     - name: 上传bin文件夹(固件+ipk)在github空间
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
         name: OpenWrt-bin-${{ env.NAME2 }}${{ env.NAME1 }}_${{ env.date }}
