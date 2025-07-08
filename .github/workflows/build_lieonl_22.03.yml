@@ -181,6 +181,11 @@ jobs:
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
 
+    - name: 清理旧缓存
+      run: |
+        cd openwrt
+        make clean
+        
     - name: 下载软件包
       id: package
       run: |
