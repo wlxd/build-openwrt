@@ -122,11 +122,7 @@ jobs:
           svn co https://github.com/281677160/N1/trunk reform
         fi
         cp -Rf `find ./ -maxdepth 1 -type d ! -path './openwrt' ! -path './'` openwrt
-        cd openwrt
-        if [ -f "build/${{matrix.target}}/$DIY_P3_SH" ]; then
-          chmod +x build/${{matrix.target}}/$DIY_P3_SH
-          /bin/bash "build/${{matrix.target}}/$DIY_P3_SH"
-        fi        
+        cd openwrt       
         if [ -f "build/${{matrix.target}}/$DIY_P1_SH" ]; then
           chmod +x build/${{matrix.target}}/$DIY_P1_SH
           /bin/bash "build/${{matrix.target}}/$DIY_P1_SH"
@@ -140,6 +136,10 @@ jobs:
           chmod +x build/${{matrix.target}}/$DIY_P2_SH
           /bin/bash "build/${{matrix.target}}/$DIY_P2_SH"
         fi
+        if [ -f "build/${{matrix.target}}/$DIY_P3_SH" ]; then
+          chmod +x build/${{matrix.target}}/$DIY_P3_SH
+          /bin/bash "build/${{matrix.target}}/$DIY_P3_SH"
+        fi 
         if [ -n "$(ls -A "build/${{matrix.target}}/patches" 2>/dev/null)" ]; then
           find "build/${{matrix.target}}/patches" -type f -name '*.patch' -print0 | sort -z | xargs -I % -t -0 -n 1 sh -c "cat '%'  | patch -d './' -p1 --forward --no-backup-if-mismatch"
         fi
