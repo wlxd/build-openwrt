@@ -180,16 +180,12 @@ jobs:
       env:
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-
-    - name: 清理旧缓存
-      run: |
-        cd openwrt
-        make clean
         
     - name: 下载软件包
       id: package
       run: |
         cd openwrt
+        make clean
         make defconfig
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
