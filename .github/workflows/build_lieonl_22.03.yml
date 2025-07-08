@@ -142,7 +142,7 @@ jobs:
         fi
         
         cp -Rf package/* './openwrt' && rm -rf './openwrt/package'
-          ./scripts/feeds update -a && ./scripts/feeds install -a
+          ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a
 
         if [ -n "$(ls -A "build/${{matrix.target}}/patches" 2>/dev/null)" ]; then
           find "build/${{matrix.target}}/patches" -type f -name '*.patch' -print0 | sort -z | xargs -I % -t -0 -n 1 sh -c "cat '%'  | patch -d './' -p1 --forward --no-backup-if-mismatch"
@@ -185,7 +185,6 @@ jobs:
       id: package
       run: |
         cd openwrt
-        make clean
         make defconfig
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
