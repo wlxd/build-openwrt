@@ -142,7 +142,6 @@ jobs:
         # fi
         cp -Rf package/* './openwrt' && rm -rf './openwrt/package'
           # ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a 
-        ./scripts/feeds update -a && ./scripts/feeds install -a
         # if [ ${{matrix.target}} == Lienol_x86_64 ]; then
             # rm -rf package/litte/adguardhome && rm -rf package/litte/luci-app-adguardhome
             # cp -f package/litte/commit/zzz-default-settings package/default-settings/files/zzz-default-settings
@@ -189,6 +188,8 @@ jobs:
         pushd po2lmo
         make && sudo make install
         popd
+        
+        ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a 
         
     - name: SSH远程连接（若打开了此功能,在此转圈2分钟还展开不了,请看《SSH连接教程》）
       uses: danshui-git/debugger-action@main
