@@ -174,7 +174,7 @@ jobs:
         make && sudo make install
         popd
         
-        ./scripts/feeds update -a && ./scripts/feeds install -a
+        ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a
        
     - name: SSH远程连接（若打开了此功能,在此转圈2分钟还展开不了,请看《SSH连接教程》）
       uses: danshui-git/debugger-action@main
