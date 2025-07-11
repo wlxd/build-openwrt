@@ -3,7 +3,7 @@
 #
 
 # 修改openwrt登陆地址,把下面的192.168.2.2修改成你想要的就可以了
-sed -i 's/192.168.1.1/192.168.3.2/g' package/base-files/files/bin/config_generate
+# sed -i 's/192.168.1.1/192.168.3.2/g' package/base-files/files/bin/config_generate
 
 # 修改主机名字，把OpenWrt-123修改你喜欢的就行（不能使用中文）
 # sed -i '/uci commit system/i\uci set system.@system[0].hostname='CSCLEDE'' package/default-settings/files/zzz-default-settings
@@ -15,7 +15,7 @@ sed -i 's/192.168.1.1/192.168.3.2/g' package/base-files/files/bin/config_generat
 # sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 
 # 修改内核版本
-#sed -i 's/KERNEL_PATCHVER:=4.14/KERNEL_PATCHVER:=4.19/g' target/linux/x86/Makefile
+# sed -i 's/KERNEL_PATCHVER:=4.14/KERNEL_PATCHVER:=4.19/g' target/linux/x86/Makefile
 # 删除lionl自带
 # rm -rf package/lean/luci-app-sfe
 # rm -rf package/lean/luci-app-flowoffload
@@ -39,28 +39,37 @@ sed -i 's/192.168.1.1/192.168.3.2/g' package/base-files/files/bin/config_generat
 # git reset --hard 7842f18c33019ec281083ff3f88294fbe5a89bda 
 # popd
 
+
+rm -rf feeds/packages/lang/golang
+git clone https://github.com/sbwml/packages_lang_golang -b 24.x feeds/packages/lang/golang
+
+
 # 这个是xray 1.8.4 锁死版
 pushd package/small/xray-core
 git reset --hard 8abfcaf24ee8e19c5b838dd355515aad91c6af85
 popd
 
-# 新增可能冲突插件
-rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
 
-rm -rf feeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang -b 24.x feeds/packages/lang/golang
+# 根据 https://github.com/kenzok8/openwrt_Build/blob/master/.github/workflows/Lienol.yml 改的
+rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
+rm -rf feeds/luci/themes/luci-theme-argon && rm -rf feeds/other/{luci-app-adguardhome,luci-app-dockerman}
+rm -rf feeds/lienol/luci-app-fileassistant && rm -rf feeds/packages/net/{adguardhome,smartdns}
+cp -f feeds/smpackage/.github/diy/zzz-default-settings package/default-settings/files/zzz-default-settings
+cp -f feeds/smpackage/.github/diy/banner package/base-files/files/etc/banner
+patch -p1 < "feeds/smpackage/.github/diy/patches/0004-luci-mod-status-firewall-disable-legacy-firewall-rul.patch"
+rm -rf feeds/smpackage/luci-theme-design && git clone -b js --single-branch https://github.com/kenzok78/luci-theme-design feeds/smpackage/luci-theme-design
 
 # 来自 kenzok8/openwrt_Build
-rm -rf feeds/luci/themes/luci-theme-argon && rm -rf feeds/other/luci-app-adguardhome && rm -rf feeds/packages/net/adguardhome
-rm -rf feeds/lienol/luci-app-fileassistant && rm -rf feeds/other/luci-app-dockerman && rm -rf feeds/packages/net/smartdns
+# rm -rf feeds/luci/themes/luci-theme-argon && rm -rf feeds/other/luci-app-adguardhome && rm -rf feeds/packages/net/adguardhome
+# rm -rf feeds/lienol/luci-app-fileassistant && rm -rf feeds/other/luci-app-dockerman && rm -rf feeds/packages/net/smartdns
 # cp -f feeds/smpackage/.github/diy/zzz-default-settings package/default-settings/files/zzz-default-settings
 # cp -f feeds/smpackage/.github/diy/banner package/base-files/files/etc/banner && rm -rf feeds/smpackage/upx
-rm -rf feeds/smpackage/luci-theme-design && git clone -b js --single-branch https://github.com/gngpp/luci-theme-design feeds/smpackage/luci-theme-design
+# rm -rf feeds/smpackage/luci-theme-design && git clone -b js --single-branch https://github.com/gngpp/luci-theme-design feeds/smpackage/luci-theme-design
 # sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 # sed -i "s/%D %V, %C/openwrt $(date +'%m.%d') by kenzo/g" package/base-files/files/etc/banner
 
-# 23.x 版本的坑
-sed -i 's/ +libopenssl-legacy//g' package/small/shadowsocksr-libev/Makefile
+# 23.x 版本的坑 这是没改的手的######
+# sed -i 's/ +libopenssl-legacy//g' package/small/shadowsocksr-libev/Makefile
 
 # 尝试压缩xray
 # sed -i -e "/\/usr\/bin\/xray/a  \\\t$\(STAGING_DIR_HOST\)\/bin\/upx --lzma --best $\(1\)\/usr\/bin\/xray" package/small/xray-core/Makefile
@@ -79,6 +88,9 @@ for i in $list; do
   sed -i "/DEFAULT_PACKAGES/,//s/$i//" target/linux/ramips/Makefile
 done
 
+# 根据 https://github.com/kenzok8/openwrt_Build/blob/master/.github/workflows/Lienol.yml 改的
+sed -i 's/192.168.1.1/192.168.3.2/g' package/base-files/files/bin/config_generate
+sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 
 # 修改插件名字（修改名字后不知道会不会对插件功能有影响，自己多测试）
 sed -i 's/"aMule设置"/"电驴下载"/g' `grep "aMule设置" -rl ./`
