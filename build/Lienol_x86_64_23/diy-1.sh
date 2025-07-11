@@ -99,9 +99,9 @@ git clone https://github.com/immortalwrt-collections/openwrt-gowebdav package/di
 
 # 可能与yml文件内的编译命令有关系，用 sed 语句拉下来的包不生效，一直无法拉取最新的xray，所以这里同为改为git clone 命令，可以拉到最新的了
 # 这里的逻辑应该是在最开始就让它加载在feeds conf的默认里面，不折腾了~~~~ 新编译的会自动崩溃！
-# git clone https://github.com/kenzok8/openwrt-packages package/kenzo
-# git clone https://github.com/kenzok8/small package/small
-# git clone https://github.com/yichya/luci-app-xray package/luci_app_xray
+git clone https://github.com/kenzok8/openwrt-packages package/kenzo
+git clone https://github.com/kenzok8/small package/small
+git clone https://github.com/yichya/luci-app-xray package/luci_app_xray
 
 # sed -i '1i src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
 # sed -i '2i src-git small https://github.com/kenzok8/small' feeds.conf.default
@@ -109,6 +109,6 @@ git clone https://github.com/immortalwrt-collections/openwrt-gowebdav package/di
 ## sed -i '$a src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
 ## sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
 
-sed -i '$a src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
+# sed -i '$a src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
 
 
