@@ -137,10 +137,10 @@ jobs:
              /bin/bash "build/${{matrix.target}}/$DIY_P2_SH"
         fi   
           
-        if [ -f "build/${{matrix.target}}/$DIY_P3_SH" ]; then
-          chmod +x build/${{matrix.target}}/$DIY_P3_SH
-          /bin/bash "build/${{matrix.target}}/$DIY_P3_SH"
-        fi 
+        # if [ -f "build/${{matrix.target}}/$DIY_P3_SH" ]; then
+        #   chmod +x build/${{matrix.target}}/$DIY_P3_SH
+        #   /bin/bash "build/${{matrix.target}}/$DIY_P3_SH"
+        # fi 
 
         cp -Rf package/* './openwrt' && rm -rf './openwrt/package'
           # ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a
