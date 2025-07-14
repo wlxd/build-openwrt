@@ -144,7 +144,7 @@ jobs:
 
         cp -Rf package/* './openwrt' && rm -rf './openwrt/package'
         
-        ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a
+        # ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a
 
         if [ -n "$(ls -A "build/${{matrix.target}}/patches" 2>/dev/null)" ]; then
           find "build/${{matrix.target}}/patches" -type f -name '*.patch' -print0 | sort -z | xargs -I % -t -0 -n 1 sh -c "cat '%'  | patch -d './' -p1 --forward --no-backup-if-mismatch"
@@ -175,6 +175,8 @@ jobs:
         pushd po2lmo
         make && sudo make install
         popd
+        
+        ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a
        
     - name: SSH远程连接（若打开了此功能,在此转圈2分钟还展开不了,请看《SSH连接教程》）
       uses: danshui-git/debugger-action@main
