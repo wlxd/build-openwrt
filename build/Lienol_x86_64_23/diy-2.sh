@@ -69,7 +69,7 @@ rm -rf feeds/smpackage/luci-theme-design && git clone -b js --single-branch http
 # sed -i "s/%D %V, %C/openwrt $(date +'%m.%d') by kenzo/g" package/base-files/files/etc/banner
 
 # 23.x 版本的坑 这是没改的手的######
-# sed -i 's/ +libopenssl-legacy//g' package/small/shadowsocksr-libev/Makefile
+sed -i 's/ +libopenssl-legacy//g' package/small/shadowsocksr-libev/Makefile
 
 # 尝试压缩xray
 # sed -i -e "/\/usr\/bin\/xray/a  \\\t$\(STAGING_DIR_HOST\)\/bin\/upx --lzma --best $\(1\)\/usr\/bin\/xray" package/small/xray-core/Makefile
