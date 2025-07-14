@@ -45,9 +45,9 @@ git clone https://github.com/sbwml/packages_lang_golang -b 24.x feeds/packages/l
 
 
 # 这个是xray 1.8.4 锁死版
-pushd package/small/xray-core
-git reset --hard 8abfcaf24ee8e19c5b838dd355515aad91c6af85
-popd
+# pushd package/small/xray-core
+# git reset --hard 8abfcaf24ee8e19c5b838dd355515aad91c6af85
+# popd
 
 
 # 根据 https://github.com/kenzok8/openwrt_Build/blob/master/.github/workflows/Lienol.yml 改的
