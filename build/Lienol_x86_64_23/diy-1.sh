@@ -64,7 +64,7 @@
 
 # little 自带了ddnsto
 # git clone https://github.com/kenzok8/litte package/litte  
-git clone https://github.com/immortalwrt-collections/openwrt-gowebdav package/diy2
+# git clone https://github.com/immortalwrt-collections/openwrt-gowebdav package/diy2
 # git clone https://github.com/kenzok8/jell package/jell
 # git clone https://github.com/xiaorouji/openwrt-passwall package/passwall
 
