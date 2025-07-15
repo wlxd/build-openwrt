@@ -8,7 +8,8 @@
 # 软件包地址：https://github.com/281677160/openwrt-package
 # 拉取插件请看《各种命令的简单介绍》第4条、第5条说明,不管大神还是新手请认真的看看,再次强调请不要一下子就拉取别人一堆插件的插件包,容易造成编译错误的
 # 增加出国源
-# sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
+sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
+sed -i '$a src-git telephony https://github.com/openwrt/telephony.git' feeds.conf.default
 # 切换增加源的方式
 # sed -i '$a src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
 # 你可能需要删除lienol的插件
@@ -38,8 +39,8 @@
 # git clone https://github.com/fw876/helloworld package/diy/helloworld
 
 # 这里展示的是另外一种拉取方式，可能更加稳妥？想要passwall的在这里开启，已经试过可以正常拉取的
-git clone https://github.com/xiaorouji/openwrt-passwall package/diy/luci-app-passwall
-
+# git clone https://github.com/xiaorouji/openwrt-passwall package/diy/luci-app-passwall
+ 
 # 自定义添加？
  # git clone -b 19.07 --single-branch https://github.com/281677160/openwrt-package
  
