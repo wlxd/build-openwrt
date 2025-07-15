@@ -103,8 +103,10 @@ jobs:
         sudo timedatectl set-timezone "$TZ"
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
-        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git config --global user.name "github-actions[bot]"
+        git config --global http.sslverify false
+        git config --global https.sslverify false
+        # git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        # git config --global user.name "github-actions[bot]"
         
     - name: 下载${{matrix.target}}源码
       working-directory: /workdir
