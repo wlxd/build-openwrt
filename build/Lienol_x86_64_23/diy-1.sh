@@ -9,7 +9,7 @@
 # 拉取插件请看《各种命令的简单介绍》第4条、第5条说明,不管大神还是新手请认真的看看,再次强调请不要一下子就拉取别人一堆插件的插件包,容易造成编译错误的
 # 增加出国源
 sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
-sed -i '$a src-git telephony https://github.com/openwrt/telephony.git' feeds.conf.default
+
 # 切换增加源的方式
 # sed -i '$a src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
 # 你可能需要删除lienol的插件
