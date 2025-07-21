@@ -79,7 +79,7 @@ list="\
   luci-app-accesscontrol   luci-app-adbyby-plus            luci-app-arpbind        luci-app-autoreboot \
   luci-app-control-timewol luci-app-control-webrestriction luci-app-control-weburl luci-app-cpufreq \
   luci-app-ddns            luci-app-filetransfer           luci-app-ipsec-vpnd     luci-app-nlbwmon \
-  luci-app-ramfree         luci-app-timecontrol            luci-app-turboacc \
+  luci-app-ramfree         luci-app-timecontrol \
   luci-app-unblockmusic    luci-app-unblockmusic           luci-app-upnp           luci-app-vlmcsd \
   luci-app-vsftpd          luci-app-wol                    luci-app-zerotier \
 "
