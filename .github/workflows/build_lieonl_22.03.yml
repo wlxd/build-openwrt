@@ -100,8 +100,16 @@ jobs:
         sudo timedatectl set-timezone "$TZ"
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
-        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git config --global user.name "github-actions[bot]"
+        git config --global http.sslverify false
+        git config --global https.sslverify false
+        # 超时和缓冲区设置
+        git config --global http.postBuffer 524288000
+        git config --global http.lowSpeedLimit 0
+        git config --global http.lowSpeedTime 999999
+        
+        # git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        # git config --global user.name "github-actions[bot]"
+        
     - name: 下载${{matrix.target}}源码
       working-directory: /workdir
       run: |
@@ -118,9 +126,6 @@ jobs:
         
     - name: 加载源,patch补丁和自定义设置
       run: |
-        if [ ${{matrix.target}} == "Lede_phicomm_n1" -o ${{matrix.target}} == "Project_phicomm_n1" ];then
-          svn co https://github.com/281677160/N1/trunk reform
-        fi
         cp -Rf `find ./ -maxdepth 1 -type d ! -path './openwrt' ! -path './'` openwrt
         cd openwrt       
         if [ -f "build/${{matrix.target}}/$DIY_P1_SH" ]; then
@@ -130,7 +135,6 @@ jobs:
         # if [ ${{matrix.target}} != "openwrt" ]; then
           # git clone -b lienol --single-branch https://github.com/281677160/openwrt-package package/danshui
         # fi
-
                 
         if [ -f "build/${{matrix.target}}/$DIY_P2_SH" ]; then
           chmod +x build/${{matrix.target}}/$DIY_P2_SH
