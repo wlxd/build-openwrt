@@ -52,8 +52,8 @@ git clone https://github.com/sbwml/packages_lang_golang -b 24.x feeds/packages/l
 
 # 根据 https://github.com/kenzok8/openwrt_Build/blob/master/.github/workflows/Lienol.yml 改的
 # rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
-rm -rf feeds/luci/themes/luci-theme-argon && rm -rf feeds/other/{luci-app-adguardhome,luci-app-dockerman}
-rm -rf feeds/lienol/luci-app-fileassistant && rm -rf feeds/packages/net/{adguardhome,smartdns}
+# rm -rf feeds/luci/themes/luci-theme-argon && rm -rf feeds/other/{luci-app-adguardhome,luci-app-dockerman}
+# rm -rf feeds/lienol/luci-app-fileassistant && rm -rf feeds/packages/net/{adguardhome,smartdns}
 # cp -f feeds/smpackage/.github/diy/zzz-default-settings package/default-settings/files/zzz-default-settings
 # cp -f feeds/smpackage/.github/diy/banner package/base-files/files/etc/banner
 # patch -p1 < "feeds/smpackage/.github/diy/patches/0004-luci-mod-status-firewall-disable-legacy-firewall-rul.patch"
@@ -69,24 +69,24 @@ rm -rf feeds/smpackage/luci-theme-design && git clone -b js --single-branch http
 # sed -i "s/%D %V, %C/openwrt $(date +'%m.%d') by kenzo/g" package/base-files/files/etc/banner
 
 # 23.x 版本的坑 这是没改的手的######
-sed -i 's/ +libopenssl-legacy//g' package/small/shadowsocksr-libev/Makefile
+# sed -i 's/ +libopenssl-legacy//g' package/small/shadowsocksr-libev/Makefile
 
 # 尝试压缩xray
 # sed -i -e "/\/usr\/bin\/xray/a  \\\t$\(STAGING_DIR_HOST\)\/bin\/upx --lzma --best $\(1\)\/usr\/bin\/xray" package/small/xray-core/Makefile
 
-list="\
-  autosamba                ddns-scripts_aliyun             ddns-scripts-cloudflare ddns-scripts_dnspod \
-  luci-app-accesscontrol   luci-app-adbyby-plus            luci-app-arpbind        luci-app-autoreboot \
-  luci-app-control-timewol luci-app-control-webrestriction luci-app-control-weburl luci-app-cpufreq \
-  luci-app-ddns            luci-app-filetransfer           luci-app-ipsec-vpnd     luci-app-nlbwmon \
-  luci-app-ramfree         luci-app-timecontrol \
-  luci-app-unblockmusic    luci-app-unblockmusic           luci-app-upnp           luci-app-vlmcsd \
-  luci-app-vsftpd          luci-app-wol                    luci-app-zerotier \
-"
-for i in $list; do
-  sed -i "/DEFAULT_PACKAGES:=/,/^\s*$/s/$i//" include/target.mk
-  sed -i "/DEFAULT_PACKAGES/,//s/$i//" target/linux/ramips/Makefile
-done
+# list="\
+#   autosamba                ddns-scripts_aliyun             ddns-scripts-cloudflare ddns-scripts_dnspod \
+#   luci-app-accesscontrol   luci-app-adbyby-plus            luci-app-arpbind        luci-app-autoreboot \
+#   luci-app-control-timewol luci-app-control-webrestriction luci-app-control-weburl luci-app-cpufreq \
+#   luci-app-ddns            luci-app-filetransfer           luci-app-ipsec-vpnd     luci-app-nlbwmon \
+#   luci-app-ramfree         luci-app-timecontrol \
+#   luci-app-unblockmusic    luci-app-unblockmusic           luci-app-upnp           luci-app-vlmcsd \
+#   luci-app-vsftpd          luci-app-wol                    luci-app-zerotier \
+# "
+# for i in $list; do
+#   sed -i "/DEFAULT_PACKAGES:=/,/^\s*$/s/$i//" include/target.mk
+#   sed -i "/DEFAULT_PACKAGES/,//s/$i//" target/linux/ramips/Makefile
+# done
 
 # 根据 https://github.com/kenzok8/openwrt_Build/blob/master/.github/workflows/Lienol.yml 改的
 
