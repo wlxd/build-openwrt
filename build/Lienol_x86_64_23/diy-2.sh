@@ -3,22 +3,22 @@
 #
 
 # 修改openwrt登陆地址,把下面的192.168.2.2修改成你想要的就可以了
-# sed -i 's/192.168.1.1/192.168.3.2/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/192.168.3.2/g' package/base-files/files/bin/config_generate
 
 # 修改主机名字，把OpenWrt-123修改你喜欢的就行（不能使用中文）
-# sed -i '/uci commit system/i\uci set system.@system[0].hostname='CSCLEDE'' package/default-settings/files/zzz-default-settings
+sed -i '/uci commit system/i\uci set system.@system[0].hostname='CSCLEDE'' package/default-settings/files/zzz-default-settings
 
 # 内核显示增加自己个性名称（281677160 build $(TZ=UTC-8 date "+%Y.%m.%d") @ 这些为后期增加）
-# sed -i "s/OpenWrt /ixxmu build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" package/default-settings/files/zzz-default-settings
+sed -i "s/OpenWrt /ixxmu build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" package/default-settings/files/zzz-default-settings
 
 # 修改 argon 为默认主题,可根据你喜欢的修改成其他的（不选择那些会自动改变为默认主题的主题才有效果）
-# sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
+sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 
 # 修改内核版本
 # sed -i 's/KERNEL_PATCHVER:=4.14/KERNEL_PATCHVER:=4.19/g' target/linux/x86/Makefile
 # 删除lionl自带
-# rm -rf package/lean/luci-app-sfe
-# rm -rf package/lean/luci-app-flowoffload
+rm -rf package/lean/luci-app-sfe
+rm -rf package/lean/luci-app-flowoffload
 # 删除small自带的音乐插件，因为我这里不能用
 # rm -rf package/small-package/UnblockNeteaseMusic
 # rm -rf package/small-package/UnblockNeteaseMusic-Go
