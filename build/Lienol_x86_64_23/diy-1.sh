@@ -8,7 +8,7 @@
 # 软件包地址：https://github.com/281677160/openwrt-package
 # 拉取插件请看《各种命令的简单介绍》第4条、第5条说明,不管大神还是新手请认真的看看,再次强调请不要一下子就拉取别人一堆插件的插件包,容易造成编译错误的
 # 增加出国源
-sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
+# sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
 
 # 切换增加源的方式
 # sed -i '$a src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
@@ -26,8 +26,8 @@ sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.de
 
 #真的是每一个都不一样，lienol维护的是19.07的主分支，如果需要添加passwall添加下面2行就可以，第二个是依赖，跟新的也算频繁，貌似很稳定，该有的插件都有了
 
-# sed -i '$a src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
-# sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
+sed -i '$a src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
+sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
 
  # git clone https://github.com/kenzok8/litte package/litte
  #  git clone https://github.com/xiaorouji/openwrt-passwall package/passwall
@@ -112,6 +112,6 @@ sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.de
 ## sed -i '$a src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
 ## sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
 
-sed -i '$a src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
+# sed -i '$a src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
 
 
