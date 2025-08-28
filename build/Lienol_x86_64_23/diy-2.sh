@@ -90,9 +90,9 @@ done
 
 # 根据 https://github.com/kenzok8/openwrt_Build/blob/master/.github/workflows/Lienol.yml 改的
 
-sed -i 's/192.168.1.1/192.168.3.2/g' package/base-files/files/bin/config_generate
+# sed -i 's/192.168.1.1/192.168.3.2/g' package/base-files/files/bin/config_generate
 
-sed -i 's/luci-theme-bootstrap/luci-theme-design/g' feeds/luci/collections/luci/Makefile
+# sed -i 's/luci-theme-bootstrap/luci-theme-design/g' feeds/luci/collections/luci/Makefile
 
 # 修改插件名字（修改名字后不知道会不会对插件功能有影响，自己多测试）
 sed -i 's/"aMule设置"/"电驴下载"/g' `grep "aMule设置" -rl ./`
