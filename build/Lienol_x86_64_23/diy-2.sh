@@ -20,6 +20,7 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/M
 rm -rf package/lean/luci-app-sfe
 rm -rf package/lean/luci-app-flowoffload
 rm -rf package/network/utils/fullconenat-nft
+
 # 删除small自带的音乐插件，因为我这里不能用
 # rm -rf package/small-package/UnblockNeteaseMusic
 # rm -rf package/small-package/UnblockNeteaseMusic-Go
