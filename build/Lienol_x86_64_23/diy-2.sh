@@ -19,6 +19,7 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/M
 # 删除lionl自带
 rm -rf package/lean/luci-app-sfe
 rm -rf package/lean/luci-app-flowoffload
+rm -rf package/network/utils/fullconenat-nft
 # 删除small自带的音乐插件，因为我这里不能用
 # rm -rf package/small-package/UnblockNeteaseMusic
 # rm -rf package/small-package/UnblockNeteaseMusic-Go
@@ -74,19 +75,19 @@ git clone https://github.com/sbwml/packages_lang_golang -b 24.x feeds/packages/l
 # 尝试压缩xray
 # sed -i -e "/\/usr\/bin\/xray/a  \\\t$\(STAGING_DIR_HOST\)\/bin\/upx --lzma --best $\(1\)\/usr\/bin\/xray" package/small/xray-core/Makefile
 
-# list="\
-#   autosamba                ddns-scripts_aliyun             ddns-scripts-cloudflare ddns-scripts_dnspod \
-#   luci-app-accesscontrol   luci-app-adbyby-plus            luci-app-arpbind        luci-app-autoreboot \
-#   luci-app-control-timewol luci-app-control-webrestriction luci-app-control-weburl luci-app-cpufreq \
-#   luci-app-ddns            luci-app-filetransfer           luci-app-ipsec-vpnd     luci-app-nlbwmon \
-#   luci-app-ramfree         luci-app-timecontrol \
-#   luci-app-unblockmusic    luci-app-unblockmusic           luci-app-upnp           luci-app-vlmcsd \
-#   luci-app-vsftpd          luci-app-wol                    luci-app-zerotier \
-# "
-# for i in $list; do
-#   sed -i "/DEFAULT_PACKAGES:=/,/^\s*$/s/$i//" include/target.mk
-#   sed -i "/DEFAULT_PACKAGES/,//s/$i//" target/linux/ramips/Makefile
-# done
+list="\
+   autosamba                ddns-scripts_aliyun             ddns-scripts-cloudflare ddns-scripts_dnspod \
+   luci-app-accesscontrol   luci-app-adbyby-plus            luci-app-arpbind        luci-app-autoreboot \
+   luci-app-control-timewol luci-app-control-webrestriction luci-app-control-weburl luci-app-cpufreq \
+   luci-app-ddns            luci-app-filetransfer           luci-app-ipsec-vpnd     luci-app-nlbwmon \
+   luci-app-ramfree         luci-app-timecontrol \
+   luci-app-unblockmusic    luci-app-unblockmusic           luci-app-upnp           luci-app-vlmcsd \
+   luci-app-vsftpd          luci-app-wol                    luci-app-zerotier \
+ "
+ for i in $list; do
+   sed -i "/DEFAULT_PACKAGES:=/,/^\s*$/s/$i//" include/target.mk
+   sed -i "/DEFAULT_PACKAGES/,//s/$i//" target/linux/ramips/Makefile
+ done
 
 # 根据 https://github.com/kenzok8/openwrt_Build/blob/master/.github/workflows/Lienol.yml 改的
 
